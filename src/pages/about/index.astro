@@ -1,0 +1,453 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import { getLangFromUrl, useTranslations } from "../../utils/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const education = [
+    {
+        degree:
+            lang === "th"
+                ? "วิศวกรรมศาสตรบัณฑิต (วิศวกรรมคอมพิวเตอร์)"
+                : "Bachelor of Engineering, Computer Engineering",
+        institution:
+            lang === "th"
+                ? "มหาวิทยาลัยเกษตรศาสตร์ วิทยาเขตศรีราชา"
+                : "Kasetsart University Sriracha Campus",
+        year: "2022 - 2025",
+        logo: "/images/kusrc.png",
+        notes:
+            lang === "th"
+                ? "นิสิตชั้นปีที่ 4 มุ่งเน้นการพัฒนาซอฟต์แวร์ เว็บแอปพลิเคชัน อัลกอริทึม และความปลอดภัยไซเบอร์"
+                : "Fourth-year Computer Engineering student focusing on software development, web applications, algorithms, and cybersecurity.",
+    },
+];
+
+const internship = [
+    {
+        role:
+            lang === "th"
+                ? "นักศึกษาฝึกงาน Full-Stack Developer"
+                : "Full-Stack Developer Intern",
+        company: "Thai Summit Harness Public Company Limited",
+        period: "2025",
+        logo: "/images/tsh.png",
+        description:
+            lang === "th"
+                ? "ออกแบบและพัฒนาเว็บไซต์ E-Commerce ให้กับวิสาหกิจชุมชนท้องถิ่นเพื่อจำหน่ายสินค้าออนไลน์ พัฒนารีแอคทีฟ UI ระบบการจัดการสินค้าและการชำระเงินที่ปลอดภัย"
+                : "Developed and designed an e-commerce website for a local community enterprise to sell products online. Created a user-friendly interface, implemented a secure payment and product management platform, and ensured high scalability.",
+    },
+];
+---
+
+<Layout>
+    <Navbar />
+
+    <section class="page-header">
+        <div class="header-container">
+            <span class="section-tag">{t("about.tag")}</span>
+            <h1 class="page-title">{t("about.title")}</h1>
+            <p class="page-description">
+                {
+                    lang === "th"
+                        ? "นักพัฒนา Full Stack และนิสิตวิศวกรรมคอมพิวเตอร์ "
+                        : "Full Stack Developer & Computer Engineering student at "
+                }
+                <strong class="highlight-text"
+                    >{
+                        lang === "th"
+                            ? "มหาวิทยาลัยเกษตรศาสตร์ วิทยาเขตศรีราชา"
+                            : "Kasetsart University Sriracha Campus"
+                    }</strong
+                >
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <section class="about-section">
+        <div class="about-container">
+            <div class="bio-grid">
+                <div class="bio-card">
+                    <h2 class="card-heading">{t("about.bio_heading")}</h2>
+                    <p>{t("about.bio_p1")}</p>
+                    <p>{t("about.bio_p2")}</p>
+                </div>
+
+                <div class="bio-card highlight-card">
+                    <h2 class="card-heading">{t("about.facts")}</h2>
+                    <ul class="facts-list">
+                        <li>
+                            <strong>{lang === "th" ? "ชื่อ:" : "Name:"}</strong>
+                            {
+                                lang === "th"
+                                    ? "ปานเนตร วนิชชากร"
+                                    : "Pannet Vanicharkorl"
+                            }
+                        </li>
+                        <li>
+                            <strong
+                                >{
+                                    lang === "th" ? "สถาบัน:" : "University:"
+                                }</strong
+                            >
+                            {
+                                lang === "th"
+                                    ? "ม.เกษตรศาสตร์ ศรีราชา"
+                                    : "Kasetsart University Sriracha Campus"
+                            }
+                        </li>
+                        <li>
+                            <strong
+                                >{lang === "th" ? "สาขา:" : "Degree:"}</strong
+                            >
+                            {
+                                lang === "th"
+                                    ? "วิศวกรรมคอมพิวเตอร์ (2565-2568)"
+                                    : "B.Eng. Computer Engineering (2022-2025)"
+                            }
+                        </li>
+                        <li>
+                            <strong
+                                >{
+                                    lang === "th" ? "ภาษา:" : "Languages:"
+                                }</strong
+                            > C++, Python, Java, JavaScript, TypeScript
+                        </li>
+                        <li><strong>Github:</strong> github.com/KPV2004</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Internship Section -->
+            <div class="timeline-section">
+                <h2 class="section-heading">{t("about.internship")}</h2>
+                <div class="timeline">
+                    {
+                        internship.map((exp) => (
+                            <div class="timeline-item">
+                                <div class="timeline-dot" />
+                                <div class="timeline-content">
+                                    <div class="content-wrapper">
+                                        {exp.logo && (
+                                            <div class="logo-box">
+                                                <img
+                                                    src={exp.logo}
+                                                    alt={exp.company}
+                                                />
+                                            </div>
+                                        )}
+                                        <div class="details-box">
+                                            <div class="timeline-header">
+                                                <h3 class="role-title">
+                                                    {exp.role}
+                                                </h3>
+                                                <span class="period-badge">
+                                                    {exp.period}
+                                                </span>
+                                            </div>
+                                            <h4 class="company-name">
+                                                {exp.company}
+                                            </h4>
+                                            <p class="exp-desc">
+                                                {exp.description}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <!-- Education Section -->
+            <div class="timeline-section">
+                <h2 class="section-heading">{t("about.education")}</h2>
+                <div class="timeline">
+                    {
+                        education.map((edu) => (
+                            <div class="timeline-item">
+                                <div class="timeline-dot" />
+                                <div class="timeline-content">
+                                    <div class="content-wrapper">
+                                        {edu.logo && (
+                                            <div class="logo-box">
+                                                <img
+                                                    src={edu.logo}
+                                                    alt={edu.institution}
+                                                />
+                                            </div>
+                                        )}
+                                        <div class="details-box">
+                                            <div class="timeline-header">
+                                                <h3 class="role-title">
+                                                    {edu.degree}
+                                                </h3>
+                                                <span class="period-badge">
+                                                    {edu.year}
+                                                </span>
+                                            </div>
+                                            <h4 class="company-name">
+                                                {edu.institution}
+                                            </h4>
+                                            <p class="exp-desc">{edu.notes}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <Footer />
+</Layout>
+
+<style>
+    .page-header {
+        padding: 5rem 1.75rem 3rem;
+        text-align: center;
+        background: radial-gradient(
+            circle at top,
+            rgba(255, 107, 74, 0.15) 0%,
+            rgba(0, 0, 0, 0) 70%
+        );
+    }
+
+    .header-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .section-tag {
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        color: #ff6b4a;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .page-title {
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: #ffffff;
+        margin: 0 0 1rem 0;
+    }
+
+    .highlight-text {
+        color: #ff7e5f;
+    }
+
+    .page-description {
+        font-size: 1.15rem;
+        color: #c7b2ad;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* About Content */
+    .about-section {
+        padding: 3rem 1.75rem;
+    }
+
+    .about-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+    }
+
+    .bio-grid {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 2rem;
+    }
+
+    .bio-card {
+        background: rgba(30, 20, 24, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        padding: 2rem;
+        backdrop-filter: blur(10px);
+    }
+
+    .highlight-card {
+        background: linear-gradient(
+            135deg,
+            rgba(45, 25, 32, 0.8) 0%,
+            rgba(30, 20, 24, 0.8) 100%
+        );
+        border-color: rgba(255, 107, 74, 0.25);
+    }
+
+    .card-heading {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0 0 1.25rem 0;
+    }
+
+    .bio-card p {
+        font-size: 1rem;
+        color: #c7b2ad;
+        line-height: 1.7;
+        margin: 0 0 1rem 0;
+    }
+
+    .bio-card p:last-child {
+        margin: 0;
+    }
+
+    .facts-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+    }
+
+    .facts-list li {
+        font-size: 0.95rem;
+        color: #c7b2ad;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .facts-list li:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .facts-list strong {
+        color: #f5e8e4;
+        margin-right: 0.5rem;
+    }
+
+    /* Timeline */
+    .section-heading {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0 0 2rem 0;
+    }
+
+    .timeline {
+        position: relative;
+        padding-left: 2rem;
+        border-left: 2px solid rgba(255, 107, 74, 0.3);
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .timeline-item {
+        position: relative;
+    }
+
+    .timeline-dot {
+        position: absolute;
+        left: -2.4rem;
+        top: 0.3rem;
+        width: 14px;
+        height: 14px;
+        background: #ff6b4a;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #ff6b4a;
+    }
+
+    .timeline-content {
+        background: rgba(30, 20, 24, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 1.5rem;
+    }
+
+    .content-wrapper {
+        display: flex;
+        gap: 1.25rem;
+        align-items: flex-start;
+    }
+
+    .logo-box {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        background: #ffffff;
+        padding: 6px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .details-box {
+        flex-grow: 1;
+    }
+
+    .timeline-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.4rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .role-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 0;
+    }
+
+    .period-badge {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #ff7e5f;
+        background: rgba(255, 126, 95, 0.15);
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+    }
+
+    .company-name {
+        font-size: 0.95rem;
+        color: #feb47b;
+        font-weight: 600;
+        margin: 0 0 0.75rem 0;
+    }
+
+    .exp-desc {
+        font-size: 0.95rem;
+        color: #a08d88;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    @media (max-width: 768px) {
+        .page-title {
+            font-size: 2.2rem;
+        }
+        .bio-grid {
+            grid-template-columns: 1fr;
+        }
+        .content-wrapper {
+            flex-direction: column;
+        }
+    }
+</style>
