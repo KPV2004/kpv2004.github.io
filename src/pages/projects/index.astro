@@ -35,7 +35,12 @@ const projects = await getCollection('projects');
             <div class="project-card">
               {data.image && (
                 <a href={detailHref} class="card-image-wrapper">
-                  <img src={data.image} alt={data.title} loading="lazy" class="card-image" />
+                  <img
+                    src={data.image}
+                    alt={data.title}
+                    loading="lazy"
+                    class:list={['card-image', { 'card-image--top': projectSlug === 'tiawpao' }]}
+                  />
                   <div class="image-overlay"></div>
                 </a>
               )}
@@ -157,6 +162,10 @@ const projects = await getCollection('projects');
     height: 100%;
     object-fit: cover;
     transition: transform 0.4s ease;
+  }
+
+  .card-image--top {
+    object-position: top center;
   }
 
   .project-card:hover .card-image {
