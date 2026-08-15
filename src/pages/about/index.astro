@@ -26,14 +26,30 @@ const education = [
     },
 ];
 
-const internship = [
+const experience = [
+    {
+        role: "ERP Developer (AX & Full-Stack Developer)",
+        company:
+            lang === "th"
+                ? "Zettasoft — บริษัทในเครือ D Plus"
+                : "Zettasoft — A D Plus Group Company",
+        period: lang === "th" ? "11 พ.ค. 2026 - ปัจจุบัน" : "11 May 2026 - Present",
+        logo: "/images/zettasoft-logo.png",
+        description:
+            lang === "th"
+                ? "Zettasoft เป็นที่ปรึกษาและผู้พัฒนาซอฟต์แวร์ครบวงจรในเครือ D Plus ให้บริการตั้งแต่เว็บแอปพลิเคชัน แอปพลิเคชันมือถือ ไปจนถึงระบบหลังบ้าน โดยรับผิดชอบปรับแต่ง พัฒนา และดูแลระบบ ERP (Microsoft Dynamics AX) รวมถึงระบบที่ทำงานร่วมกับ ERP ด้วย Node.js, React.js และ Go (Golang)"
+                : "Zettasoft is a full-service software consulting and development company within D Plus Group, delivering web, mobile, and complex back-office systems. Responsible for customizing, developing, and maintaining ERP solutions (Microsoft Dynamics AX) and integrated systems using Node.js, React.js, and Go (Golang).",
+    },
     {
         role:
             lang === "th"
                 ? "นักศึกษาฝึกงาน Full-Stack Developer"
                 : "Full-Stack Developer Intern",
         company: "Thai Summit Harness Public Company Limited",
-        period: "2025",
+        period:
+            lang === "th"
+                ? "พ.ย. 2025 - มี.ค. 2026"
+                : "Nov 2025 - Mar 2026",
         logo: "/images/tsh.png",
         description:
             lang === "th"
@@ -46,7 +62,7 @@ const internship = [
 <Layout>
     <Navbar />
 
-    <section class="page-header">
+    <section class="page-header" id="main-content">
         <div class="header-container">
             <span class="section-tag">{t("about.tag")}</span>
             <h1 class="page-title">{t("about.title")}</h1>
@@ -122,12 +138,12 @@ const internship = [
                 </div>
             </div>
 
-            <!-- Internship Section -->
+            <!-- Work Experience Section -->
             <div class="timeline-section">
-                <h2 class="section-heading">{t("about.internship")}</h2>
+                <h2 class="section-heading">{t("about.experience")}</h2>
                 <div class="timeline">
                     {
-                        internship.map((exp) => (
+                        experience.map((exp) => (
                             <div class="timeline-item">
                                 <div class="timeline-dot" />
                                 <div class="timeline-content">
@@ -215,7 +231,7 @@ const internship = [
         text-align: center;
         background: radial-gradient(
             circle at top,
-            rgba(255, 107, 74, 0.15) 0%,
+            rgba(126, 231, 135, 0.15) 0%,
             rgba(0, 0, 0, 0) 70%
         );
     }
@@ -230,7 +246,7 @@ const internship = [
         font-size: 0.85rem;
         font-weight: 700;
         letter-spacing: 0.1em;
-        color: #ff6b4a;
+        color: #7ee787;
         display: block;
         margin-bottom: 0.5rem;
     }
@@ -243,12 +259,12 @@ const internship = [
     }
 
     .highlight-text {
-        color: #ff7e5f;
+        color: #79c0ff;
     }
 
     .page-description {
         font-size: 1.15rem;
-        color: #c7b2ad;
+        color: #b7c2cd;
         line-height: 1.6;
         margin: 0;
     }
@@ -273,7 +289,7 @@ const internship = [
     }
 
     .bio-card {
-        background: rgba(30, 20, 24, 0.7);
+        background: rgba(17, 23, 31, 0.7);
         border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 20px;
         padding: 2rem;
@@ -284,9 +300,9 @@ const internship = [
         background: linear-gradient(
             135deg,
             rgba(45, 25, 32, 0.8) 0%,
-            rgba(30, 20, 24, 0.8) 100%
+            rgba(17, 23, 31, 0.8) 100%
         );
-        border-color: rgba(255, 107, 74, 0.25);
+        border-color: rgba(126, 231, 135, 0.25);
     }
 
     .card-heading {
@@ -298,7 +314,7 @@ const internship = [
 
     .bio-card p {
         font-size: 1rem;
-        color: #c7b2ad;
+        color: #b7c2cd;
         line-height: 1.7;
         margin: 0 0 1rem 0;
     }
@@ -318,7 +334,7 @@ const internship = [
 
     .facts-list li {
         font-size: 0.95rem;
-        color: #c7b2ad;
+        color: #b7c2cd;
         padding-bottom: 0.75rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
@@ -329,7 +345,7 @@ const internship = [
     }
 
     .facts-list strong {
-        color: #f5e8e4;
+        color: #edf4f8;
         margin-right: 0.5rem;
     }
 
@@ -344,7 +360,7 @@ const internship = [
     .timeline {
         position: relative;
         padding-left: 2rem;
-        border-left: 2px solid rgba(255, 107, 74, 0.3);
+        border-left: 2px solid rgba(126, 231, 135, 0.3);
         display: flex;
         flex-direction: column;
         gap: 2rem;
@@ -360,13 +376,13 @@ const internship = [
         top: 0.3rem;
         width: 14px;
         height: 14px;
-        background: #ff6b4a;
+        background: #7ee787;
         border-radius: 50%;
-        box-shadow: 0 0 10px #ff6b4a;
+        box-shadow: 0 0 10px #7ee787;
     }
 
     .timeline-content {
-        background: rgba(30, 20, 24, 0.7);
+        background: rgba(17, 23, 31, 0.7);
         border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 16px;
         padding: 1.5rem;
@@ -419,7 +435,7 @@ const internship = [
     .period-badge {
         font-size: 0.8rem;
         font-weight: 600;
-        color: #ff7e5f;
+        color: #79c0ff;
         background: rgba(255, 126, 95, 0.15);
         padding: 0.25rem 0.75rem;
         border-radius: 9999px;
@@ -427,14 +443,14 @@ const internship = [
 
     .company-name {
         font-size: 0.95rem;
-        color: #feb47b;
+        color: #d2a8ff;
         font-weight: 600;
         margin: 0 0 0.75rem 0;
     }
 
     .exp-desc {
         font-size: 0.95rem;
-        color: #a08d88;
+        color: #8e9ba9;
         line-height: 1.6;
         margin: 0;
     }

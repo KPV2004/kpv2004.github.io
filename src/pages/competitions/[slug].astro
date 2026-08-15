@@ -20,7 +20,7 @@ const { data } = entry;
 <Layout>
   <Navbar />
 
-  <article class="detail-container">
+  <article class="detail-container" id="main-content">
     <div class="back-nav">
       <a href="/competitions" class="back-link">&larr; Back to Competitions</a>
     </div>
@@ -67,7 +67,7 @@ const { data } = entry;
   }
 
   .back-link {
-    color: #ff7e5f;
+    color: #79c0ff;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.92rem;
@@ -75,12 +75,12 @@ const { data } = entry;
   }
 
   .back-link:hover {
-    color: #ff9d85;
+    color: #9aefa1;
     text-decoration: underline;
   }
 
   .detail-header {
-    background: rgba(30, 20, 24, 0.7);
+    background: rgba(17, 23, 31, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 20px;
     padding: clamp(1.5rem, 4vw, 2.5rem);
@@ -112,7 +112,7 @@ const { data } = entry;
 
   .comp-date {
     font-size: 0.88rem;
-    color: #a08d88;
+    color: #8e9ba9;
   }
 
   .detail-title {
@@ -124,7 +124,7 @@ const { data } = entry;
 
   .comp-category {
     font-size: 0.95rem;
-    color: #ff7e5f;
+    color: #79c0ff;
     font-weight: 600;
     display: block;
     margin-bottom: 1.15rem;
@@ -132,7 +132,7 @@ const { data } = entry;
 
   .detail-desc {
     font-size: clamp(1rem, 2.5vw, 1.15rem);
-    color: #c7b2ad;
+    color: #b7c2cd;
     line-height: 1.6;
     margin: 0 0 1.35rem 0;
   }
@@ -146,7 +146,7 @@ const { data } = entry;
   .tech-pill {
     font-size: 0.78rem;
     background: rgba(255, 255, 255, 0.05);
-    color: #f5e8e4;
+    color: #edf4f8;
     padding: 0.25rem 0.65rem;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -154,11 +154,11 @@ const { data } = entry;
 
   /* MDX Content Styling */
   .mdx-content {
-    background: rgba(30, 20, 24, 0.5);
+    background: rgba(17, 23, 31, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 20px;
     padding: clamp(1.25rem, 4vw, 2.5rem);
-    color: #c7b2ad;
+    color: #b7c2cd;
     line-height: 1.75;
     font-size: 1rem;
     overflow-x: hidden;

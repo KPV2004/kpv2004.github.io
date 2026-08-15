@@ -11,7 +11,7 @@ const t = useTranslations(lang);
 <Layout>
   <Navbar />
 
-  <section class="page-header">
+  <section class="page-header" id="main-content">
     <div class="header-container">
       <span class="section-tag">{t('contact.tag')}</span>
       <h1 class="page-title">{t('contact.title')}</h1>
@@ -28,7 +28,7 @@ const t = useTranslations(lang);
         <div class="info-card">
           <h2 class="card-heading">{t('contact.info')}</h2>
           <p class="info-intro">
-            {lang === 'th' ? 'สามารถติดต่อพรรษเนตรผ่านอีเมลหรือช่องทางสื่อสังคมออนไลน์เพื่อพูดคุยสอบถามหรือร่วมงานได้เสมอครับ' : 'Feel free to reach out directly via email or connect with me on social platforms.'}
+            {lang === 'th' ? 'สามารถติดต่อปานเนตรผ่านอีเมลหรือช่องทางออนไลน์เพื่อพูดคุย สอบถาม หรือร่วมงานกันได้เสมอครับ' : 'Feel free to reach out directly via email or connect with me on social platforms.'}
           </p>
 
           <div class="contact-methods">
@@ -70,27 +70,27 @@ const t = useTranslations(lang);
           </div>
         </div>
 
-        <!-- Glassmorphism Contact Form -->
+        <!-- The form opens a prepared email draft; no fake submission state. -->
         <div class="form-card">
-          <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+          <form class="contact-form" id="contact-form">
             <div class="form-group">
               <label for="name">{t('contact.name_label')}</label>
-              <input type="text" id="name" required placeholder={lang === 'th' ? 'ระบุชื่อของคุณ' : 'John Doe'} />
+              <input type="text" id="name" name="name" required autocomplete="name" placeholder={lang === 'th' ? 'ระบุชื่อของคุณ' : 'John Doe'} />
             </div>
 
             <div class="form-group">
               <label for="email">{t('contact.email_label')}</label>
-              <input type="email" id="email" required placeholder={lang === 'th' ? 'name@example.com' : 'john@example.com'} />
+              <input type="email" id="email" name="email" required autocomplete="email" placeholder={lang === 'th' ? 'name@example.com' : 'john@example.com'} />
             </div>
 
             <div class="form-group">
               <label for="subject">{t('contact.subject_label')}</label>
-              <input type="text" id="subject" required placeholder={lang === 'th' ? 'หัวข้อที่ต้องการติดต่อ' : 'Project Inquiry / Job Opportunity'} />
+              <input type="text" id="subject" name="subject" required placeholder={lang === 'th' ? 'หัวข้อที่ต้องการติดต่อ' : 'Project Inquiry / Job Opportunity'} />
             </div>
 
             <div class="form-group">
               <label for="message">{t('contact.message_label')}</label>
-              <textarea id="message" rows="5" required placeholder={lang === 'th' ? 'พิมพ์รายละเอียดข้อความของคุณที่นี่...' : 'Tell me about your project or inquiry...'}></textarea>
+              <textarea id="message" name="message" rows="5" required placeholder={lang === 'th' ? 'พิมพ์รายละเอียดข้อความของคุณที่นี่...' : 'Tell me about your project or inquiry...'}></textarea>
             </div>
 
             <button type="submit" class="submit-btn">{t('contact.send')}</button>
@@ -103,11 +103,25 @@ const t = useTranslations(lang);
   <Footer />
 </Layout>
 
+<script>
+  const contactForm = document.querySelector<HTMLFormElement>("#contact-form");
+  contactForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(contactForm);
+    const subject = String(data.get("subject") || "Portfolio inquiry");
+    const name = String(data.get("name") || "");
+    const email = String(data.get("email") || "");
+    const message = String(data.get("message") || "");
+    const body = `${message}\n\n— ${name}\n${email}`;
+    window.location.href = `mailto:pannetvanicharkorl@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>
+
 <style>
   .page-header {
     padding: 5rem 1.75rem 3rem;
     text-align: center;
-    background: radial-gradient(circle at top, rgba(255, 107, 74, 0.15) 0%, rgba(0,0,0,0) 70%);
+    background: radial-gradient(circle at top, rgba(126, 231, 135, 0.15) 0%, rgba(0,0,0,0) 70%);
   }
 
   .header-container {
@@ -120,7 +134,7 @@ const t = useTranslations(lang);
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    color: #ff6b4a;
+    color: #7ee787;
     display: block;
     margin-bottom: 0.5rem;
   }
@@ -134,7 +148,7 @@ const t = useTranslations(lang);
 
   .page-description {
     font-size: 1.15rem;
-    color: #c7b2ad;
+    color: #b7c2cd;
     line-height: 1.6;
     margin: 0;
   }
@@ -156,7 +170,7 @@ const t = useTranslations(lang);
 
   /* Info Card */
   .info-card {
-    background: rgba(30, 20, 24, 0.7);
+    background: rgba(17, 23, 31, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 24px;
     padding: 2.25rem;
@@ -172,7 +186,7 @@ const t = useTranslations(lang);
 
   .info-intro {
     font-size: 1rem;
-    color: #c7b2ad;
+    color: #b7c2cd;
     line-height: 1.65;
     margin-bottom: 2rem;
   }
@@ -196,8 +210,8 @@ const t = useTranslations(lang);
   }
 
   .method-item:hover {
-    background: rgba(255, 107, 74, 0.12);
-    border-color: rgba(255, 107, 74, 0.3);
+    background: rgba(126, 231, 135, 0.12);
+    border-color: rgba(126, 231, 135, 0.3);
     transform: translateX(4px);
   }
 
@@ -205,8 +219,8 @@ const t = useTranslations(lang);
     width: 44px;
     height: 44px;
     border-radius: 12px;
-    background: rgba(255, 107, 74, 0.15);
-    color: #ff7e5f;
+    background: rgba(126, 231, 135, 0.15);
+    color: #79c0ff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -220,7 +234,7 @@ const t = useTranslations(lang);
 
   .method-label {
     font-size: 0.8rem;
-    color: #a08d88;
+    color: #8e9ba9;
     font-weight: 500;
   }
 
@@ -228,11 +242,12 @@ const t = useTranslations(lang);
     font-size: 0.95rem;
     color: #ffffff;
     font-weight: 600;
+    overflow-wrap: anywhere;
   }
 
   /* Form Card */
   .form-card {
-    background: rgba(30, 20, 24, 0.7);
+    background: rgba(17, 23, 31, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 24px;
     padding: 2.25rem;
@@ -254,14 +269,14 @@ const t = useTranslations(lang);
   .form-group label {
     font-size: 0.88rem;
     font-weight: 600;
-    color: #f5e8e4;
+    color: #edf4f8;
   }
 
   .form-group input, .form-group textarea {
     width: 100%;
     padding: 0.85rem 1rem;
     border-radius: 12px;
-    background: rgba(20, 13, 16, 0.8);
+    background: rgba(8, 11, 15, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #ffffff;
     font-family: inherit;
@@ -271,12 +286,12 @@ const t = useTranslations(lang);
 
   .form-group input:focus, .form-group textarea:focus {
     outline: none;
-    border-color: #ff6b4a;
-    box-shadow: 0 0 0 3px rgba(255, 107, 74, 0.2);
+    border-color: #7ee787;
+    box-shadow: 0 0 0 3px rgba(126, 231, 135, 0.2);
   }
 
   .submit-btn {
-    background: linear-gradient(135deg, #e05a36 0%, #ff7a59 100%);
+    background: linear-gradient(135deg, #57ab5a 0%, #7ee787 100%);
     color: #ffffff;
     border: none;
     padding: 0.9rem 1.75rem;
@@ -285,13 +300,13 @@ const t = useTranslations(lang);
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 15px rgba(224, 90, 54, 0.35);
+    box-shadow: 0 4px 15px rgba(126, 231, 135, 0.35);
     margin-top: 0.5rem;
   }
 
   .submit-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(224, 90, 54, 0.5);
+    box-shadow: 0 8px 25px rgba(126, 231, 135, 0.5);
   }
 
   @media (max-width: 850px) {

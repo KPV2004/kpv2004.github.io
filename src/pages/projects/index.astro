@@ -14,7 +14,7 @@ const projects = await getCollection('projects');
 <Layout>
   <Navbar />
 
-  <section class="page-header">
+  <section class="page-header" id="main-content">
     <div class="header-container">
       <span class="section-tag">{t('projects.tag')}</span>
       <h1 class="page-title">{t('projects.title')}</h1>
@@ -84,7 +84,7 @@ const projects = await getCollection('projects');
   .page-header {
     padding: 5rem 1.75rem 3rem;
     text-align: center;
-    background: radial-gradient(circle at top, rgba(255, 107, 74, 0.15) 0%, rgba(0,0,0,0) 70%);
+    background: radial-gradient(circle at top, rgba(126, 231, 135, 0.15) 0%, rgba(0,0,0,0) 70%);
   }
 
   .header-container {
@@ -97,7 +97,7 @@ const projects = await getCollection('projects');
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    color: #ff6b4a;
+    color: #7ee787;
     display: block;
     margin-bottom: 0.5rem;
   }
@@ -111,7 +111,7 @@ const projects = await getCollection('projects');
 
   .page-description {
     font-size: 1.15rem;
-    color: #c7b2ad;
+    color: #b7c2cd;
     line-height: 1.6;
     margin: 0;
   }
@@ -133,7 +133,7 @@ const projects = await getCollection('projects');
   }
 
   .project-card {
-    background: rgba(30, 20, 24, 0.7);
+    background: rgba(17, 23, 31, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 24px;
     overflow: hidden;
@@ -145,7 +145,7 @@ const projects = await getCollection('projects');
 
   .project-card:hover {
     transform: translateY(-6px);
-    border-color: rgba(255, 107, 74, 0.4);
+    border-color: rgba(126, 231, 135, 0.4);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
   }
 
@@ -175,7 +175,7 @@ const projects = await getCollection('projects');
   .image-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(30, 20, 24, 0.9) 0%, transparent 60%);
+    background: linear-gradient(to top, rgba(17, 23, 31, 0.9) 0%, transparent 60%);
   }
 
   .card-content {
@@ -188,7 +188,7 @@ const projects = await getCollection('projects');
   .category-badge {
     font-size: 0.78rem;
     font-weight: 600;
-    color: #feb47b;
+    color: #d2a8ff;
     background: rgba(254, 180, 123, 0.12);
     padding: 0.25rem 0.8rem;
     border-radius: 9999px;
@@ -203,7 +203,7 @@ const projects = await getCollection('projects');
 
   .project-desc {
     font-size: 0.95rem;
-    color: #a08d88;
+    color: #8e9ba9;
     line-height: 1.6;
     margin: 0 0 1.5rem 0;
     flex-grow: 1;
@@ -219,7 +219,7 @@ const projects = await getCollection('projects');
   .tag-pill {
     font-size: 0.78rem;
     background: rgba(255, 255, 255, 0.05);
-    color: #c7b2ad;
+    color: #b7c2cd;
     padding: 0.25rem 0.65rem;
     border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.06);
@@ -244,21 +244,21 @@ const projects = await getCollection('projects');
   }
 
   .details-btn {
-    background: linear-gradient(135deg, #e05a36 0%, #ff7a59 100%);
+    background: linear-gradient(135deg, #57ab5a 0%, #7ee787 100%);
     color: #ffffff;
-    box-shadow: 0 4px 15px rgba(224, 90, 54, 0.35);
+    box-shadow: 0 4px 15px rgba(126, 231, 135, 0.35);
     flex-grow: 1;
     justify-content: center;
   }
 
   .details-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(224, 90, 54, 0.5);
+    box-shadow: 0 6px 20px rgba(126, 231, 135, 0.5);
   }
 
   .github-btn {
     background: rgba(255, 255, 255, 0.06);
-    color: #f5e8e4;
+    color: #edf4f8;
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 0.65rem;
   }
