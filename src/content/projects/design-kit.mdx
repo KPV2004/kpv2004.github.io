@@ -1,0 +1,35 @@
+---
+title: "Design Kit"
+category: "AI Tooling"
+description: "A Claude skill that turns an app description into a complete, reviewable design project: wireframes, a clickable mockup, a design system, dev diagrams and a UX spec."
+date: "2026"
+tags: ["Claude Skill", "Python", "JavaScript", "HTML", "Tailwind CSS"]
+image: "/images/design-kit.png"
+images: ["/images/design-kit-mockup.png", "/images/design-kit-diagrams.png"]
+github: "https://github.com/KPV2004/design-kit"
+featured: true
+---
+
+# Design Kit
+
+![Design Kit wireframes on desktop, tablet and mobile](/images/design-kit.png)
+
+## Overview
+
+**Design Kit** is a skill for AI coding agents that works like a designer handing off to a dev team. Describe an app and it produces every screen, not only the happy path, and keeps all the files in sync when you ask for a change.
+
+## Key Features
+
+- **Single Source of Truth**: `design.md` holds colors (light and dark), typography and icons, checked for WCAG AA contrast.
+- **Wireframes & Mockup**: Low-fi wireframes of every screen first, then a clickable HTML and Tailwind mockup with a theme picker.
+- **Dev Diagrams**: User flow, ER, state, sequence and API contract diagrams that match the screens.
+- **UX Spec**: State matrix per screen, exact error text, interactions and a copy deck developers can build from.
+- **Change Propagation**: A change such as "add a phone field" updates the wireframe, mockup, spec and diagrams together.
+- **Verification**: A script checks that every file agrees before handover.
+
+## Tech Stack
+
+- **Skill Runtime**: Claude Code plugin marketplace
+- **Tooling**: Python and Shell verification scripts
+- **Outputs**: HTML, CSS and JavaScript
+- **Source Code**: [GitHub Repository](https://github.com/KPV2004/design-kit)
