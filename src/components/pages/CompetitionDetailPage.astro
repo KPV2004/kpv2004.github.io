@@ -14,177 +14,39 @@ const { lang, entry } = Astro.props;
 const { Content } = await render(entry);
 const { data } = entry;
 const t = useTranslations(lang);
+const isParticipation = /participant|ผู้เข้าร่วม/i.test(data.award);
 ---
 
 <Layout lang={lang} title={`${data.title} — ${t('meta.site_name')}`} description={data.description}>
   <Navbar lang={lang} />
 
-  <article class="detail-container" id="main-content">
-    <div class="back-nav">
-      <a href={localizePath('/competitions', lang)} class="back-link">&larr; {t('detail.back_competitions')}</a>
-    </div>
+  <article class="page-shell page-shell--reading detail-page" id="main-content">
+    <a href={localizePath('/competitions', lang)} class="text-link">&larr; {t('detail.back_competitions')}</a>
 
     <header class="detail-header">
-      <div class="header-top">
-        <div class="award-badge">
-          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+      <div class="detail-top">
+        <span class:list={['badge', isParticipation ? 'badge--neutral' : 'badge--award']}>
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/>
           </svg>
           {data.award}
-        </div>
-        <span class="comp-date">{data.date}</span>
+        </span>
+        <span class="meta">{data.date}</span>
       </div>
 
       <h1 class="detail-title">{data.title}</h1>
-      <span class="comp-category">{data.category}</span>
+      <span class="detail-subtitle">{data.category}</span>
       <p class="detail-desc">{data.description}</p>
 
-      <div class="tech-stack">
-        {data.technologies.map((tech) => (
-          <span class="tech-pill">{tech}</span>
-        ))}
+      <div class="tag-list">
+        {data.technologies.map((tech) => <span class="tag">{tech}</span>)}
       </div>
     </header>
 
-    <main class="mdx-content">
+    <div class="prose">
       <Content />
-    </main>
+    </div>
   </article>
 
   <Footer lang={lang} />
 </Layout>
-
-<style>
-  .detail-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: clamp(2rem, 5vw, 3.5rem) 1.25rem 4rem;
-  }
-
-  .back-nav {
-    margin-bottom: 1.5rem;
-  }
-
-  .back-link {
-    color: #79c0ff;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.92rem;
-    transition: color 0.2s ease;
-  }
-
-  .back-link:hover {
-    color: #9aefa1;
-    text-decoration: underline;
-  }
-
-  .detail-header {
-    background: rgba(17, 23, 31, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    padding: clamp(1.5rem, 4vw, 2.5rem);
-    margin-bottom: 2.5rem;
-    backdrop-filter: blur(12px);
-  }
-
-  .header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .award-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: #ffd700;
-    background: rgba(255, 215, 0, 0.12);
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    padding: 0.3rem 0.8rem;
-    border-radius: 9999px;
-  }
-
-  .comp-date {
-    font-size: 0.88rem;
-    color: #8e9ba9;
-  }
-
-  .detail-title {
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-    font-weight: 800;
-    color: #ffffff;
-    margin: 0 0 0.35rem 0;
-  }
-
-  .comp-category {
-    font-size: 0.95rem;
-    color: #79c0ff;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 1.15rem;
-  }
-
-  .detail-desc {
-    font-size: clamp(1rem, 2.5vw, 1.15rem);
-    color: #b7c2cd;
-    line-height: 1.6;
-    margin: 0 0 1.35rem 0;
-  }
-
-  .tech-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.45rem;
-  }
-
-  .tech-pill {
-    font-size: 0.78rem;
-    background: rgba(255, 255, 255, 0.05);
-    color: #edf4f8;
-    padding: 0.25rem 0.65rem;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  /* MDX Content Styling */
-  .mdx-content {
-    background: rgba(17, 23, 31, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 20px;
-    padding: clamp(1.25rem, 4vw, 2.5rem);
-    color: #b7c2cd;
-    line-height: 1.75;
-    font-size: 1rem;
-    overflow-x: hidden;
-  }
-
-  .mdx-content :global(h1),
-  .mdx-content :global(h2),
-  .mdx-content :global(h3) {
-    color: #ffffff;
-    margin-top: 1.75rem;
-    margin-bottom: 0.85rem;
-    font-weight: 700;
-  }
-
-  .mdx-content :global(h1) { font-size: clamp(1.4rem, 4vw, 1.8rem); }
-  .mdx-content :global(h2) { font-size: clamp(1.2rem, 3.5vw, 1.4rem); border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.4rem; }
-
-  .mdx-content :global(p) {
-    margin-bottom: 1.15rem;
-  }
-
-  .mdx-content :global(ul), .mdx-content :global(ol) {
-    padding-left: 1.25rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .mdx-content :global(li) {
-    margin-bottom: 0.4rem;
-  }
-</style>

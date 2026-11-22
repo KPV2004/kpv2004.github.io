@@ -106,8 +106,8 @@ const switchPath = getLocalizedPath(pathname, targetLang);
         position: sticky;
         top: 0;
         z-index: 1000;
-        background: rgba(8, 11, 15, .82);
-        border-bottom: 1px solid var(--line);
+        background: var(--header-bg);
+        border-bottom: 1px solid var(--border);
         backdrop-filter: blur(18px) saturate(140%);
     }
     .nav-shell {
@@ -125,59 +125,59 @@ const switchPath = getLocalizedPath(pathname, targetLang);
         place-items: center;
         width: 34px;
         height: 34px;
-        border: 1px solid rgba(126, 231, 135, .45);
+        border: 1px solid var(--accent-border);
         border-radius: 8px;
-        background: var(--green-soft);
-        color: var(--green);
+        background: var(--accent-soft);
+        color: var(--accent);
         font: 600 .75rem var(--mono);
-        box-shadow: inset 0 0 18px rgba(126, 231, 135, .06);
+        box-shadow: inset 0 0 18px var(--accent-soft);
     }
     .brand-copy { display: flex; flex-direction: column; gap: 1px; }
     .brand-copy strong { font-size: .88rem; letter-spacing: -.015em; }
-    .brand-copy small { color: var(--muted); font: 400 .65rem var(--mono); }
+    .brand-copy small { color: var(--text-muted); font: 400 var(--fs-label) var(--mono); }
     .desktop-nav { display: flex; align-items: center; gap: .65rem; }
     .nav-links { display: flex; align-items: center; gap: .1rem; }
     .nav-link {
         display: inline-flex;
         padding: .55rem .68rem;
         border-radius: 7px;
-        color: var(--muted);
-        font-size: .78rem;
+        color: var(--text-muted);
+        font-size: .8125rem;
         font-weight: 600;
         text-decoration: none;
         transition: color .2s ease, background .2s ease;
     }
-    .nav-link:hover { color: var(--text); background: rgba(255,255,255,.04); }
-    .nav-link.active { color: var(--text); background: rgba(255,255,255,.055); }
-    .nav-link.active::before { content: "_"; color: var(--green); margin-right: 1px; font-family: var(--mono); }
+    .nav-link:hover { color: var(--text); background: var(--tint); }
+    .nav-link.active { color: var(--text); background: var(--tint-hover); }
+    .nav-link.active::before { content: "_"; color: var(--accent); margin-right: 1px; font-family: var(--mono); }
     .lang-switch {
         display: grid;
         place-items: center;
         width: 34px;
         height: 30px;
-        border: 1px solid var(--line);
+        border: 1px solid var(--border);
         border-radius: 7px;
-        color: var(--muted-strong);
-        font: 600 .66rem var(--mono);
+        color: var(--text-secondary);
+        font: 600 var(--fs-label) var(--mono);
         text-decoration: none;
         transition: border-color .2s ease, color .2s ease;
     }
-    .lang-switch:hover { border-color: var(--line-strong); color: var(--text); }
+    .lang-switch:hover { border-color: var(--border-strong); color: var(--text); }
     .contact-link {
         display: inline-flex;
         align-items: center;
         gap: .45rem;
         padding: .58rem .9rem;
-        border: 1px solid rgba(126,231,135,.32);
+        border: 1px solid var(--accent-border);
         border-radius: 7px;
-        background: var(--green-soft);
-        color: var(--green);
-        font: 500 .72rem var(--mono);
+        background: var(--accent-soft);
+        color: var(--accent);
+        font: 500 var(--fs-label) var(--mono);
         text-decoration: none;
         transition: background .2s ease, transform .2s ease;
     }
-    .contact-link:hover { background: rgba(126,231,135,.16); transform: translateY(-1px); }
-    .contact-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 10px rgba(126,231,135,.75); }
+    .contact-link:hover { background: color-mix(in srgb, var(--accent) 16%, transparent); transform: translateY(-1px); }
+    .contact-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
     .mobile-controls { display: none; align-items: center; gap: .55rem; }
     .menu-toggle {
         width: 38px;
@@ -185,7 +185,7 @@ const switchPath = getLocalizedPath(pathname, targetLang);
         display: grid;
         place-content: center;
         gap: 6px;
-        border: 1px solid var(--line);
+        border: 1px solid var(--border);
         border-radius: 7px;
         background: transparent;
         cursor: pointer;
@@ -194,12 +194,12 @@ const switchPath = getLocalizedPath(pathname, targetLang);
     .menu-toggle.is-active span:first-child { transform: translateY(3.5px) rotate(45deg); }
     .menu-toggle.is-active span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
     .mobile-nav { display: none; max-height: 0; overflow: hidden; border-top: 1px solid transparent; transition: max-height .3s ease, border-color .3s ease; }
-    .mobile-nav.is-open { max-height: 520px; border-color: var(--line); }
+    .mobile-nav.is-open { max-height: 520px; border-color: var(--border); }
     .mobile-links { width: min(calc(100% - 2rem), var(--max-width)); margin: 0 auto; padding: .75rem 0 1rem; }
-    .mobile-link, .mobile-contact { display: flex; align-items: center; justify-content: space-between; padding: .85rem .75rem; color: var(--muted-strong); text-decoration: none; border-bottom: 1px solid var(--line); font-size: .9rem; }
-    .mobile-link span { color: var(--muted); font: .65rem var(--mono); }
-    .mobile-link.active { color: var(--green); }
-    .mobile-contact { margin-top: .7rem; border: 1px solid rgba(126,231,135,.3); border-radius: 8px; color: var(--green); font: 500 .8rem var(--mono); }
+    .mobile-link, .mobile-contact { display: flex; align-items: center; justify-content: space-between; padding: .85rem .75rem; color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid var(--border); font-size: .9rem; }
+    .mobile-link span { color: var(--text-muted); font: var(--fs-label) var(--mono); }
+    .mobile-link.active { color: var(--accent); }
+    .mobile-contact { margin-top: .7rem; border: 1px solid var(--accent-border); border-radius: var(--radius-control); color: var(--accent); font: 500 .8rem var(--mono); }
 
     @media (max-width: 980px) {
         .desktop-nav { display: none; }
