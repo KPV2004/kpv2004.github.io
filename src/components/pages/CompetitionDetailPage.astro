@@ -20,33 +20,35 @@ const isParticipation = /participant|ผู้เข้าร่วม/i.test(da
 <Layout lang={lang} title={`${data.title} — ${t('meta.site_name')}`} description={data.description}>
   <Navbar lang={lang} />
 
-  <article class="page-shell page-shell--reading detail-page" id="main-content">
-    <a href={localizePath('/competitions', lang)} class="text-link">&larr; {t('detail.back_competitions')}</a>
+  <main class="page-shell page-shell--reading detail-page" id="main-content">
+    <article>
+      <a href={localizePath('/competitions', lang)} class="text-link">&larr; {t('detail.back_competitions')}</a>
 
-    <header class="detail-header">
-      <div class="detail-top">
-        <span class:list={['badge', isParticipation ? 'badge--neutral' : 'badge--award']}>
-          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/>
-          </svg>
-          {data.award}
-        </span>
-        <span class="meta">{data.date}</span>
+      <header class="detail-header">
+        <div class="detail-top">
+          <span class:list={['badge', isParticipation ? 'badge--neutral' : 'badge--award']}>
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z"/>
+            </svg>
+            {data.award}
+          </span>
+          <span class="meta">{data.date}</span>
+        </div>
+
+        <h1 class="detail-title">{data.title}</h1>
+        <span class="detail-subtitle">{data.category}</span>
+        <p class="detail-desc">{data.description}</p>
+
+        <div class="tag-list">
+          {data.technologies.map((tech) => <span class="tag">{tech}</span>)}
+        </div>
+      </header>
+
+      <div class="prose">
+        <Content />
       </div>
-
-      <h1 class="detail-title">{data.title}</h1>
-      <span class="detail-subtitle">{data.category}</span>
-      <p class="detail-desc">{data.description}</p>
-
-      <div class="tag-list">
-        {data.technologies.map((tech) => <span class="tag">{tech}</span>)}
-      </div>
-    </header>
-
-    <div class="prose">
-      <Content />
-    </div>
-  </article>
+    </article>
+  </main>
 
   <Footer lang={lang} />
 </Layout>

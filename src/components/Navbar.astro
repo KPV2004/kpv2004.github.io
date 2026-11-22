@@ -193,8 +193,9 @@ const switchPath = getLocalizedPath(pathname, targetLang);
     .menu-toggle span { display: block; width: 17px; height: 1px; background: var(--text); transition: transform .2s ease; }
     .menu-toggle.is-active span:first-child { transform: translateY(3.5px) rotate(45deg); }
     .menu-toggle.is-active span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
-    .mobile-nav { display: none; max-height: 0; overflow: hidden; border-top: 1px solid transparent; transition: max-height .3s ease, border-color .3s ease; }
-    .mobile-nav.is-open { max-height: 520px; border-color: var(--border); }
+    /* visibility keeps the collapsed links out of the tab order and the a11y tree. */
+    .mobile-nav { display: none; visibility: hidden; max-height: 0; overflow: hidden; border-top: 1px solid transparent; transition: max-height .3s ease, border-color .3s ease, visibility 0s linear .3s; }
+    .mobile-nav.is-open { visibility: visible; max-height: 520px; border-color: var(--border); transition-delay: 0s; }
     .mobile-links { width: min(calc(100% - 2rem), var(--max-width)); margin: 0 auto; padding: .75rem 0 1rem; }
     .mobile-link, .mobile-contact { display: flex; align-items: center; justify-content: space-between; padding: .85rem .75rem; color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid var(--border); font-size: .9rem; }
     .mobile-link span { color: var(--text-muted); font: var(--fs-label) var(--mono); }
@@ -205,6 +206,7 @@ const switchPath = getLocalizedPath(pathname, targetLang);
         .desktop-nav { display: none; }
         .mobile-controls { display: flex; }
         .mobile-nav { display: block; }
+        .lang-switch, .menu-toggle { width: 44px; height: 44px; }
     }
     @media (max-width: 440px) { .brand-copy small { display: none; } }
 </style>

@@ -18,7 +18,7 @@ const certificates = await getLocalizedCollection('certificates', lang);
 <Layout lang={lang} title={t('meta.certifications_title')} description={t('certifications.desc')}>
   <Navbar lang={lang} />
 
-  <div class="page-shell" id="main-content">
+  <main class="page-shell" id="main-content">
     <header class="page-header">
       <span class="section-tag">{t('certifications.tag')}</span>
       <h1 class="page-title">{t('certifications.title')}</h1>
@@ -50,7 +50,7 @@ const certificates = await getLocalizedCollection('certificates', lang);
         );
       })}
     </section>
-  </div>
+  </main>
 
   <Footer lang={lang} />
 </Layout>

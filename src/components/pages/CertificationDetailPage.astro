@@ -19,26 +19,28 @@ const t = useTranslations(lang);
 <Layout lang={lang} title={`${data.title} — ${t('meta.site_name')}`} description={`${data.title} · ${t('cert.issued_by')} ${data.issuer}`}>
   <Navbar lang={lang} />
 
-  <article class="page-shell page-shell--reading detail-page" id="main-content">
-    <a href={localizePath('/certifications', lang)} class="text-link">&larr; {t('detail.back_certifications')}</a>
+  <main class="page-shell page-shell--reading detail-page" id="main-content">
+    <article>
+      <a href={localizePath('/certifications', lang)} class="text-link">&larr; {t('detail.back_certifications')}</a>
 
-    <header class="detail-header">
-      <div class="detail-top">
-        <span class="badge">{t('cert.issued_by')} {data.issuer}</span>
-        <span class="meta">{data.date}</span>
+      <header class="detail-header">
+        <div class="detail-top">
+          <span class="badge">{t('cert.issued_by')} {data.issuer}</span>
+          <span class="meta">{data.date}</span>
+        </div>
+
+        <h1 class="detail-title">{data.title}</h1>
+
+        <div class="tag-list">
+          {data.skills.map((skill) => <span class="tag">{skill}</span>)}
+        </div>
+      </header>
+
+      <div class="prose">
+        <Content />
       </div>
-
-      <h1 class="detail-title">{data.title}</h1>
-
-      <div class="tag-list">
-        {data.skills.map((skill) => <span class="tag">{skill}</span>)}
-      </div>
-    </header>
-
-    <div class="prose">
-      <Content />
-    </div>
-  </article>
+    </article>
+  </main>
 
   <Footer lang={lang} />
 </Layout>

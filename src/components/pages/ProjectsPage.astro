@@ -18,7 +18,7 @@ const projects = await getLocalizedCollection('projects', lang);
 <Layout lang={lang} title={t('meta.projects_title')} description={t('projects.desc')}>
   <Navbar lang={lang} />
 
-  <div class="page-shell" id="main-content">
+  <main class="page-shell" id="main-content">
     <header class="page-header">
       <span class="section-tag">{t('projects.tag')}</span>
       <h1 class="page-title">{t('projects.title')}</h1>
@@ -59,7 +59,7 @@ const projects = await getLocalizedCollection('projects', lang);
         );
       })}
     </section>
-  </div>
+  </main>
 
   <Footer lang={lang} />
 </Layout>
