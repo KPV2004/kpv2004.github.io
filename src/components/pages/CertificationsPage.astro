@@ -1,5 +1,6 @@
 ---
 import { getLocalizedCollection, entrySlug } from '../../utils/content';
+import { Image } from "astro:assets";
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../Navbar.astro";
 import Footer from "../Footer.astro";
@@ -34,7 +35,7 @@ const certificates = await getLocalizedCollection('certificates', lang);
           <article class="card">
             {data.image && (
               <div class="card-media">
-                <img src={data.image} alt="" loading="lazy" />
+                <Image src={data.image} alt="" widths={[400, 800]} sizes="(max-width: 420px) 100vw, 360px" />
               </div>
             )}
             <div class="card-body">

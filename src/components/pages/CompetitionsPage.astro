@@ -1,5 +1,6 @@
 ---
 import { getLocalizedCollection, entrySlug } from '../../utils/content';
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../Navbar.astro';
 import Footer from '../Footer.astro';
@@ -37,7 +38,7 @@ const isParticipation = (award: string) => /participant|ผู้เข้าร
           <article class="card comp-card">
             {data.image && (
               <div class="card-media">
-                <img src={data.image} alt="" loading="lazy" />
+                <Image src={data.image} alt="" widths={[320, 640, 800]} sizes="(max-width: 768px) 100vw, 300px" />
               </div>
             )}
             <div class="card-body">
