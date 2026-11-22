@@ -1,0 +1,35 @@
+---
+title: "Design Kit"
+category: "เครื่องมือ AI"
+description: "Claude skill ที่เปลี่ยนคำอธิบายแอปให้เป็นโปรเจกต์ดีไซน์ที่ครบถ้วนและพร้อมให้รีวิว ทั้ง wireframe, mockup ที่คลิกได้, design system, ไดอะแกรมสำหรับนักพัฒนา และ UX spec"
+date: "2026"
+tags: ["Claude Skill", "Python", "JavaScript", "HTML", "Tailwind CSS"]
+image: "/images/design-kit.png"
+images: ["/images/design-kit-mockup.png", "/images/design-kit-diagrams.png"]
+github: "https://github.com/KPV2004/design-kit"
+featured: true
+---
+
+# Design Kit
+
+![Wireframe ของ Design Kit บนเดสก์ท็อป แท็บเล็ต และมือถือ](/images/design-kit.png)
+
+## ภาพรวม
+
+**Design Kit** คือ skill สำหรับ AI coding agent ที่ทำงานเหมือนนักออกแบบที่ส่งมอบงานให้ทีมพัฒนา เพียงอธิบายแอป ระบบจะสร้างทุกหน้าจอ ไม่ใช่แค่เส้นทางการใช้งานปกติ และคอยอัปเดตไฟล์ทั้งหมดให้สอดคล้องกันเมื่อมีการขอแก้ไข
+
+## ฟีเจอร์หลัก
+
+- **แหล่งข้อมูลหลักเพียงแห่งเดียว**: `design.md` เก็บสี (ทั้งโหมดสว่างและมืด) ตัวอักษร และไอคอน พร้อมตรวจคอนทราสต์ตามมาตรฐาน WCAG AA
+- **Wireframe และ Mockup**: เริ่มจาก wireframe แบบ low-fi ของทุกหน้าจอ แล้วต่อด้วย mockup ที่คลิกได้ด้วย HTML และ Tailwind พร้อมตัวเลือกธีม
+- **ไดอะแกรมสำหรับนักพัฒนา**: ไดอะแกรม User flow, ER, State, Sequence และ API contract ที่สอดคล้องกับหน้าจอ
+- **UX Spec**: ตารางสถานะของแต่ละหน้าจอ ข้อความแจ้งข้อผิดพลาดแบบตรงตัว การโต้ตอบ และ copy deck ที่นักพัฒนานำไปสร้างได้ทันที
+- **กระจายการเปลี่ยนแปลง**: การแก้ไขอย่าง "เพิ่มช่องเบอร์โทรศัพท์" จะอัปเดต wireframe, mockup, spec และไดอะแกรมไปพร้อมกัน
+- **การตรวจสอบ**: มีสคริปต์ตรวจว่าทุกไฟล์สอดคล้องกันก่อนส่งมอบงาน
+
+## เทคโนโลยีที่ใช้
+
+- **Skill Runtime**: Claude Code plugin marketplace
+- **Tooling**: สคริปต์ตรวจสอบด้วย Python และ Shell
+- **Outputs**: HTML, CSS และ JavaScript
+- **ซอร์สโค้ด**: [GitHub Repository](https://github.com/KPV2004/design-kit)
