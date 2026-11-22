@@ -298,6 +298,6 @@ export function localizePath(path: string, lang: Lang) {
 
 /** The same page in another locale: ("/th/projects/tiawpao", "en") -> "/projects/tiawpao" */
 export function getLocalizedPath(pathname: string, targetLang: Lang) {
-  const path = pathname.replace(/^\/th(?=\/|$)/, '') || '/';
+  const path = pathname.replace(/^\/th(?=\/|$)/, '').replace(/\/+$/, '') || '/';
   return localizePath(path, targetLang);
 }
