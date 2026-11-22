@@ -33,6 +33,7 @@
     font-weight: 700;
     line-height: var(--leading-heading);
     letter-spacing: var(--tracking-heading);
+    text-wrap: balance;
 }
 .page-description {
     max-width: 640px;
@@ -186,6 +187,7 @@
     font-weight: 700;
     line-height: 1.12;
     letter-spacing: var(--tracking-heading);
+    text-wrap: balance;
 }
 .detail-subtitle { display: block; margin-bottom: .9rem; color: var(--info); font-size: .9375rem; font-weight: 500; }
 .detail-desc {
