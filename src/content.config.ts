@@ -1,8 +1,11 @@
+// Each collection holds one folder per locale (en/, th/) with matching slugs.
+// Entry ids look like "en/tiawpao"; see src/utils/content.ts for locale helpers.
+
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 const projects = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/projects' }),
+  loader: glob({ pattern: '{en,th}/**/*.{md,mdx}', base: './src/content/projects' }),
   schema: z.object({
     title: z.string(),
     category: z.string(),
@@ -18,7 +21,7 @@ const projects = defineCollection({
 });
 
 const competitions = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/competitions' }),
+  loader: glob({ pattern: '{en,th}/**/*.{md,mdx}', base: './src/content/competitions' }),
   schema: z.object({
     title: z.string(),
     award: z.string(),
@@ -32,7 +35,7 @@ const competitions = defineCollection({
 });
 
 const certificates = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/certificates' }),
+  loader: glob({ pattern: '{en,th}/**/*.{md,mdx}', base: './src/content/certificates' }),
   schema: z.object({
     title: z.string(),
     issuer: z.string(),
