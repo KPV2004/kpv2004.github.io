@@ -108,8 +108,8 @@ const phrases = (text: string) =>
       </div>
 
       <div class="metrics">
-        <div><strong>1+</strong><span>{t("hero.exp")}</span></div>
-        <div><strong>{allProjects.length}+</strong><span>{t("hero.projects_count")}</span></div>
+        <div><strong>1</strong><span>{t("hero.exp")}</span></div>
+        <div><strong>{allProjects.length}</strong><span>{t("hero.projects_count")}</span></div>
         <div><strong>{competitions.length}</strong><span>{t("hero.awards_count")}</span></div>
         <div class="metric-note"><span class="commit-icon">●</span><p><b>{certificates.length} {t("hero.credentials")}</b><br />{t("hero.learning")}</p></div>
       </div>
@@ -255,7 +255,7 @@ const phrases = (text: string) =>
     .hero-grid { grid-template-columns: 1fr; }.code-window { max-width: 620px; transform: none; }.metrics { grid-template-columns: repeat(3, 1fr); }.metrics .metric-note { grid-column: 1/-1; border-top: 1px solid var(--border); }.project-row { grid-template-columns: 1fr 1fr; gap: 2rem; }.stack-section { grid-template-columns: 1fr; }.stack-heading { position: static; }.section-intro { grid-template-columns: 1fr; gap: 1rem; }
   }
   @media (max-width: 680px) {
-    .hero { padding-top: 3.5rem; }.hero h1 { font-size: var(--fs-display-sm); }.hero-actions .button { width: 100%; }.metrics { grid-template-columns: 1fr 1fr; }.metrics > div:nth-child(2) { border-right: 0; }.metrics > div:nth-child(3) { border-top: 1px solid var(--border); }.metrics .metric-note { grid-column: auto; border-top: 1px solid var(--border); }.project-row { grid-template-columns: 1fr; gap: 1.3rem; }.project-info { padding: 0 0 .5rem; }.approach-grid { grid-template-columns: 1fr; }.approach-grid article { border-right: 0; border-bottom: 1px solid var(--border); }.approach-grid article:last-child { border-bottom: 0; }.approach-grid h3 { margin-top: 1.5rem; }.cta-decoration { display: none; }
+    .hero { padding-top: 3.5rem; }.hero h1 { font-size: var(--fs-display-sm); }.hero-actions .button { width: 100%; }.code-window { display: none; }.metrics { grid-template-columns: 1fr 1fr; }.metrics > div:nth-child(2) { border-right: 0; }.metrics > div:nth-child(3) { border-top: 1px solid var(--border); }.metrics .metric-note { grid-column: auto; border-top: 1px solid var(--border); }.project-row { grid-template-columns: 1fr; gap: 1.3rem; }.project-info { padding: 0 0 .5rem; }.approach-grid { grid-template-columns: 1fr; }.approach-grid article { border-right: 0; border-bottom: 1px solid var(--border); }.approach-grid article:last-child { border-bottom: 0; }.approach-grid h3 { margin-top: 1.5rem; }.cta-decoration { display: none; }
   }
   @media (max-width: 420px) {
     .section-shell, .hero { width: min(calc(100% - 1.5rem), var(--max-width)); }.code-body { overflow-x: auto; }.metrics { grid-template-columns: 1fr; }.metrics > div { border-right: 0; border-bottom: 1px solid var(--border); }.metrics > div:nth-child(3), .metrics .metric-note { border-top: 0; }.metrics > div:last-child { border-bottom: 0; }
