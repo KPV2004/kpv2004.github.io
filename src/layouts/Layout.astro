@@ -27,7 +27,7 @@ const {
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
     </head>
@@ -100,12 +100,21 @@ const {
         --reading-width: 860px;
 
         /* Type */
-        --sans: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+        /* Manrope and Plex Mono have no Thai glyphs; Thai falls through to Plex Sans Thai. */
+        --sans: "Manrope", "IBM Plex Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --mono: "IBM Plex Mono", "IBM Plex Sans Thai", "SFMono-Regular", Consolas, monospace;
         --fs-label: .75rem;
         --fs-link: .8125rem;
         --fs-card-title: 1.375rem;
         --fs-page-title: clamp(2.25rem, 4vw, 3.45rem);
+        --fs-display: clamp(2.8rem, 5.4vw, 5.25rem);
+        --fs-display-sm: clamp(2.4rem, 13vw, 3.6rem);
+        --leading-display: 1.04;
+        --leading-heading: 1.08;
+        --tracking-display: -.065em;
+        --tracking-heading: -.05em;
+        --tracking-title: -.03em;
+        --tracking-label: .08em;
 
         /* Temporary aliases for the old token names; prefer the names above. */
         --line: var(--border);
@@ -117,6 +126,20 @@ const {
         --blue: var(--info);
         --blue-soft: var(--info-soft);
         --purple: var(--syntax-purple);
+    }
+
+    /* Thai: negative tracking makes stacked vowels and tone marks collide, and
+       they need taller lines. Small mono labels get a size bump instead. */
+    html:lang(th) {
+        --fs-display: clamp(2.5rem, 4.8vw, 4.5rem);
+        --fs-display-sm: clamp(2.2rem, 10.5vw, 3rem);
+        --fs-label: .8125rem;
+        --leading-display: 1.3;
+        --leading-heading: 1.3;
+        --tracking-display: 0;
+        --tracking-heading: 0;
+        --tracking-title: 0;
+        --tracking-label: 0;
     }
 
     *, *::before, *::after { box-sizing: border-box; }
@@ -254,7 +277,7 @@ const {
         color: var(--text-subtle);
         font: 500 var(--fs-label) var(--mono);
         text-transform: uppercase;
-        letter-spacing: .08em;
+        letter-spacing: var(--tracking-label);
     }
     .portfolio-footer .footer-nav a,
     .portfolio-footer .footer-social a {
