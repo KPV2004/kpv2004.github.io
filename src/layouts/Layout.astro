@@ -1,15 +1,17 @@
 ---
-import { getLangFromUrl } from "../utils/i18n";
+import { getLangFromUrl, useTranslations, type Lang } from "../utils/i18n";
 
 interface Props {
+    lang?: Lang;
     title?: string;
     description?: string;
 }
 
-const lang = getLangFromUrl(Astro.url);
+const lang = Astro.props.lang ?? getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const {
-    title = "Pannet Vanicharkorl — Software Engineer",
-    description = "Software engineer and Computer Engineering graduate building reliable, thoughtful digital products.",
+    title = t("meta.default_title"),
+    description = t("meta.default_description"),
 } = Astro.props;
 ---
 
@@ -29,7 +31,7 @@ const {
         <title>{title}</title>
     </head>
     <body>
-        <a class="skip-link" href="#main-content">Skip to content</a>
+        <a class="skip-link" href="#main-content">{t("layout.skip_link")}</a>
         <div class="site-noise" aria-hidden="true"></div>
         <slot />
     </body>

@@ -3,7 +3,7 @@ import { render, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../Navbar.astro';
 import Footer from '../Footer.astro';
-import { useTranslations, type Lang } from '../../utils/i18n';
+import { useTranslations, localizePath, type Lang } from '../../utils/i18n';
 
 interface Props {
   lang: Lang;
@@ -16,12 +16,12 @@ const { data } = entry;
 const t = useTranslations(lang);
 ---
 
-<Layout>
-  <Navbar />
+<Layout lang={lang} title={`${data.title} — ${t('meta.site_name')}`} description={data.description}>
+  <Navbar lang={lang} />
 
   <article class="detail-container" id="main-content">
     <div class="back-nav">
-      <a href="/competitions" class="back-link">&larr; Back to Competitions</a>
+      <a href={localizePath('/competitions', lang)} class="back-link">&larr; {t('detail.back_competitions')}</a>
     </div>
 
     <header class="detail-header">
@@ -51,7 +51,7 @@ const t = useTranslations(lang);
     </main>
   </article>
 
-  <Footer />
+  <Footer lang={lang} />
 </Layout>
 
 <style>

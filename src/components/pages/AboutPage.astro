@@ -13,76 +13,42 @@ const t = useTranslations(lang);
 
 const education = [
     {
-        degree:
-            lang === "th"
-                ? "วิศวกรรมศาสตรบัณฑิต (วิศวกรรมคอมพิวเตอร์)"
-                : "Bachelor of Engineering, Computer Engineering",
-        institution:
-            lang === "th"
-                ? "มหาวิทยาลัยเกษตรศาสตร์ วิทยาเขตศรีราชา"
-                : "Kasetsart University Sriracha Campus",
+        degree: t("about.edu_degree"),
+        institution: t("about.university"),
         year: "2022 - 2025",
         logo: "/images/kusrc.png",
-        notes:
-            lang === "th"
-                ? "จบการศึกษา GPA 3.49 / 4.00 มุ่งเน้นการพัฒนาซอฟต์แวร์ เว็บแอปพลิเคชัน อัลกอริทึม และความปลอดภัยไซเบอร์"
-                : "Graduated with GPA 3.49 / 4.00, focusing on software development, web applications, algorithms, and cybersecurity.",
+        notes: t("about.edu_notes"),
     },
 ];
 
 const experience = [
     {
         role: "ERP Developer (AX & Full-Stack Developer)",
-        company:
-            lang === "th"
-                ? "D Plus Intertrade Co., Ltd."
-                : "D Plus Intertrade Co., Ltd.",
-        period: lang === "th" ? "พ.ค. 2569 - ปัจจุบัน" : "May 2026 - Present",
+        company: "D Plus Intertrade Co., Ltd.",
+        period: t("about.exp_dplus_period"),
         logo: "/images/dplus-logo.png",
-        description:
-            lang === "th"
-                ? "ปรับแต่ง พัฒนา และดูแลระบบ ERP บน Microsoft Dynamics AX เพื่อสนับสนุนกระบวนการทำงานขององค์กร พัฒนาและดูแลระบบที่เชื่อมต่อกับ ERP รวมถึงพัฒนาเว็บแอปพลิเคชันและระบบหลังบ้านด้วย Node.js, React.js และ Go (Golang)"
-                : "Customize, develop, and maintain ERP systems on Microsoft Dynamics AX to support business processes. Develop and maintain systems connected to the ERP, and build web applications and back-end services with Node.js, React.js, and Go (Golang).",
+        description: t("about.exp_dplus_desc"),
     },
     {
-        role:
-            lang === "th"
-                ? "นักศึกษาฝึกงาน Full-Stack Developer"
-                : "Full-Stack Developer Intern",
+        role: t("about.exp_tsh_role"),
         company: "Thai Summit Harness Public Company Limited",
-        period:
-            lang === "th"
-                ? "พ.ย. 2025 - มี.ค. 2026"
-                : "Nov 2025 - Mar 2026",
+        period: t("about.exp_tsh_period"),
         logo: "/images/tsh.png",
-        description:
-            lang === "th"
-                ? "ออกแบบและพัฒนาเว็บไซต์ E-Commerce ให้กับวิสาหกิจชุมชนท้องถิ่นเพื่อจำหน่ายสินค้าออนไลน์ พัฒนาฟังก์ชันการชำระเงินและการจัดการสินค้า โดยเน้นความปลอดภัยและการรองรับการขยายตัวของระบบ"
-                : "Developed and designed an e-commerce website for a local community enterprise to sell products online. Created a user-friendly interface, implemented a secure payment and product management platform, and ensured high scalability.",
+        description: t("about.exp_tsh_desc"),
     },
 ];
 ---
 
-<Layout>
-    <Navbar />
+<Layout lang={lang} title={t("meta.about_title")} description={t("meta.about_description")}>
+    <Navbar lang={lang} />
 
     <section class="page-header" id="main-content">
         <div class="header-container">
             <span class="section-tag">{t("about.tag")}</span>
             <h1 class="page-title">{t("about.title")}</h1>
             <p class="page-description">
-                {
-                    lang === "th"
-                        ? "นักพัฒนา Full Stack และ ERP Developer จบวิศวกรรมคอมพิวเตอร์ "
-                        : "Full-Stack & ERP (Dynamics AX) Developer, Computer Engineering graduate of "
-                }
-                <strong class="highlight-text"
-                    >{
-                        lang === "th"
-                            ? "มหาวิทยาลัยเกษตรศาสตร์ วิทยาเขตศรีราชา"
-                            : "Kasetsart University Sriracha Campus"
-                    }</strong
-                >
+                {t("about.intro")}
+                <strong class="highlight-text">{t("about.university")}</strong>
             </p>
         </div>
     </section>
@@ -100,53 +66,14 @@ const experience = [
                 <div class="bio-card highlight-card">
                     <h2 class="card-heading">{t("about.facts")}</h2>
                     <ul class="facts-list">
-                        <li>
-                            <strong>{lang === "th" ? "ชื่อ:" : "Name:"}</strong>
-                            {
-                                lang === "th"
-                                    ? "ปานเนตร วนิชชากร"
-                                    : "Pannet Vanicharkorl"
-                            }
-                        </li>
-                        <li>
-                            <strong
-                                >{
-                                    lang === "th" ? "สถาบัน:" : "University:"
-                                }</strong
-                            >
-                            {
-                                lang === "th"
-                                    ? "ม.เกษตรศาสตร์ ศรีราชา"
-                                    : "Kasetsart University Sriracha Campus"
-                            }
-                        </li>
-                        <li>
-                            <strong
-                                >{lang === "th" ? "สาขา:" : "Degree:"}</strong
-                            >
-                            {
-                                lang === "th"
-                                    ? "วิศวกรรมคอมพิวเตอร์ (2565-2568)"
-                                    : "B.Eng. Computer Engineering (2022-2025)"
-                            }
-                        </li>
-                        <li>
-                            <strong
-                                >{
-                                    lang === "th" ? "ภาษา:" : "Languages:"
-                                }</strong
-                            > C++, Python, Java, JavaScript, TypeScript
-                        </li>
-                        <li>
-                            <strong>{lang === "th" ? "ตำแหน่ง:" : "Role:"}</strong>
-                            ERP Developer (AX) & Full-Stack Developer
-                        </li>
-                        <li>
-                            <strong>{lang === "th" ? "ที่อยู่:" : "Location:"}</strong>
-                            {lang === "th" ? "กรุงเทพมหานคร" : "Bangkok, Thailand"}
-                        </li>
+                        <li><strong>{t("about.fact_name")}</strong> {t("about.title")}</li>
+                        <li><strong>{t("about.fact_university")}</strong> {t("about.university")}</li>
+                        <li><strong>{t("about.fact_degree")}</strong> {t("about.fact_degree_value")}</li>
+                        <li><strong>{t("about.fact_languages")}</strong> C++, Python, Java, JavaScript, TypeScript</li>
+                        <li><strong>{t("about.fact_role")}</strong> ERP Developer (AX) & Full-Stack Developer</li>
+                        <li><strong>{t("about.fact_location")}</strong> {t("about.fact_location_value")}</li>
                         <li><strong>GPA:</strong> 3.49 / 4.00</li>
-                        <li><strong>Github:</strong> github.com/KPV2004</li>
+                        <li><strong>GitHub:</strong> github.com/KPV2004</li>
                     </ul>
                 </div>
             </div>
@@ -235,7 +162,7 @@ const experience = [
         </div>
     </section>
 
-    <Footer />
+    <Footer lang={lang} />
 </Layout>
 
 <style>

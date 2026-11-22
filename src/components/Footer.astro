@@ -1,40 +1,47 @@
 ---
-import { getLangFromUrl } from "../utils/i18n";
+import { getLangFromUrl, useTranslations, localizePath, type Lang } from "../utils/i18n";
 
-const lang = getLangFromUrl(Astro.url);
-const base = lang === "th" ? "/th" : "";
+interface Props {
+  lang?: Lang;
+}
+
+const lang = Astro.props.lang ?? getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const currentYear = new Date().getFullYear();
-const links = lang === "th"
-  ? [["เกี่ยวกับฉัน", `${base}/about`], ["ผลงาน", `${base}/projects`], ["การแข่งขัน", `${base}/competitions`], ["เกียรติบัตร", `${base}/certifications`]]
-  : [["About", "/about"], ["Projects", "/projects"], ["Competitions", "/competitions"], ["Certifications", "/certifications"]];
+const links = [
+  [t("nav.about"), "/about"],
+  [t("nav.projects"), "/projects"],
+  [t("nav.competitions"), "/competitions"],
+  [t("nav.certifications"), "/certifications"],
+].map(([label, path]) => [label, localizePath(path, lang)]);
 ---
 
 <footer class="portfolio-footer">
   <div class="footer-shell">
     <div class="footer-main">
       <div class="footer-brand">
-        <a href={base || "/"} class="brand-line"><span>PV</span>Pannet Vanicharkorl</a>
-        <p>{lang === "th" ? "วิศวกรซอฟต์แวร์สาย Full Stack ที่สร้างผลิตภัณฑ์ดิจิทัลให้ใช้งานง่าย เชื่อถือได้ และพร้อมเติบโต" : "Full-stack software engineer building digital products that are useful, reliable, and ready to grow."}</p>
+        <a href={localizePath("/", lang)} class="brand-line"><span>PV</span>Pannet Vanicharkorl</a>
+        <p>{t("footer.tagline")}</p>
         <a class="email" href="mailto:pannetvanicharkorl@gmail.com">pannetvanicharkorl@gmail.com <span>↗</span></a>
       </div>
 
-      <nav class="footer-nav" aria-label="Footer navigation">
-        <span class="footer-label">{lang === "th" ? "สำรวจ" : "Explore"}</span>
+      <nav class="footer-nav" aria-label={t("footer.nav_label")}>
+        <span class="footer-label">{t("footer.explore")}</span>
         {links.map(([label, href]) => <a href={href}>{label}</a>)}
       </nav>
 
       <div class="footer-social">
-        <span class="footer-label">{lang === "th" ? "ช่องทางออนไลน์" : "Elsewhere"}</span>
+        <span class="footer-label">{t("footer.elsewhere")}</span>
         <a href="https://github.com/KPV2004" target="_blank" rel="noopener noreferrer">GitHub <span>↗</span></a>
         <a href="https://www.linkedin.com/in/pannet-vanicharkorl/" target="_blank" rel="noopener noreferrer">LinkedIn <span>↗</span></a>
-        <a href={`${base}/contact`}>{lang === "th" ? "ติดต่อ" : "Contact"} <span>↗</span></a>
+        <a href={localizePath("/contact", lang)}>{t("nav.contact")} <span>↗</span></a>
       </div>
     </div>
 
     <div class="footer-bottom">
       <p>© {currentYear} Pannet Vanicharkorl</p>
-      <p><span class="status-dot"></span>{lang === "th" ? "พร้อมรับโอกาสใหม่" : "Open to software engineering opportunities"}</p>
-      <p>Built with Astro <span class="version">v7</span></p>
+      <p><span class="status-dot"></span>{t("footer.status")}</p>
+      <p>{t("footer.built_with")} <span class="version">v7</span></p>
     </div>
   </div>
 </footer>

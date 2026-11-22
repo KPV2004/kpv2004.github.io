@@ -3,7 +3,7 @@ import { render, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../Navbar.astro';
 import Footer from '../Footer.astro';
-import { useTranslations, type Lang } from '../../utils/i18n';
+import { useTranslations, localizePath, type Lang } from '../../utils/i18n';
 
 interface Props {
   lang: Lang;
@@ -16,17 +16,17 @@ const { data } = entry;
 const t = useTranslations(lang);
 ---
 
-<Layout>
-  <Navbar />
+<Layout lang={lang} title={`${data.title} — ${t('meta.site_name')}`} description={`${data.title} · ${t('cert.issued_by')} ${data.issuer}`}>
+  <Navbar lang={lang} />
 
   <article class="detail-container" id="main-content">
     <div class="back-nav">
-      <a href="/certifications" class="back-link">&larr; Back to Certificates</a>
+      <a href={localizePath('/certifications', lang)} class="back-link">&larr; {t('detail.back_certifications')}</a>
     </div>
 
     <header class="detail-header">
       <div class="header-top">
-        <span class="cert-issuer">Issued by {data.issuer}</span>
+        <span class="cert-issuer">{t('cert.issued_by')} {data.issuer}</span>
         <span class="cert-date">{data.date}</span>
       </div>
 
@@ -44,7 +44,7 @@ const t = useTranslations(lang);
     </main>
   </article>
 
-  <Footer />
+  <Footer lang={lang} />
 </Layout>
 
 <style>

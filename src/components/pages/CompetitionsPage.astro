@@ -3,7 +3,7 @@ import { getLocalizedCollection, entrySlug } from '../../utils/content';
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../Navbar.astro';
 import Footer from '../Footer.astro';
-import { useTranslations, type Lang } from '../../utils/i18n';
+import { useTranslations, localizePath, type Lang } from '../../utils/i18n';
 
 interface Props {
   lang: Lang;
@@ -15,8 +15,8 @@ const t = useTranslations(lang);
 const competitions = await getLocalizedCollection('competitions', lang);
 ---
 
-<Layout>
-  <Navbar />
+<Layout lang={lang} title={t('meta.competitions_title')} description={t('competitions.desc')}>
+  <Navbar lang={lang} />
 
   <section class="page-header" id="main-content">
     <div class="header-container">
@@ -34,7 +34,7 @@ const competitions = await getLocalizedCollection('competitions', lang);
         {competitions.map((comp) => {
           const compSlug = entrySlug(comp);
           const { data } = comp;
-          const detailHref = lang === 'th' ? `/th/competitions/${compSlug}` : `/competitions/${compSlug}`;
+          const detailHref = localizePath(`/competitions/${compSlug}`, lang);
           return (
             <div class="comp-card">
               {data.image && (
@@ -66,7 +66,7 @@ const competitions = await getLocalizedCollection('competitions', lang);
                   </div>
 
                   <a href={detailHref} class="details-link">
-                    {t('card.read_mdx')} &rarr;
+                    {t('card.view_details')} &rarr;
                   </a>
                 </div>
               </div>
@@ -77,7 +77,7 @@ const competitions = await getLocalizedCollection('competitions', lang);
     </div>
   </section>
 
-  <Footer />
+  <Footer lang={lang} />
 </Layout>
 
 <style>

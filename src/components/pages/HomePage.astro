@@ -3,7 +3,7 @@ import { getLocalizedCollection, entrySlug } from "../../utils/content";
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../Navbar.astro";
 import Footer from "../Footer.astro";
-import { useTranslations, type Lang } from "../../utils/i18n";
+import { useTranslations, localizePath, type Lang } from "../../utils/i18n";
 
 interface Props {
   lang: Lang;
@@ -28,105 +28,50 @@ const projects = allProjects
   .slice(0, 3);
 
 const skills = [
-  { label: "01 / Languages", items: ["TypeScript", "JavaScript", "Go", "Python", "Java", "C++"] },
-  { label: "02 / Product", items: ["React", "Next.js", "React Native", "Astro", "Tailwind CSS"] },
-  { label: "03 / Systems", items: ["Node.js", "GoFiber", "PostgreSQL", "WebSocket", "Firebase"] },
-  { label: "04 / ERP", items: ["Microsoft Dynamics AX", "ERP Integration", "API Integration"] },
-  { label: "05 / Workflow", items: ["Git", "Docker", "CI/CD", "Figma", "Postman"] },
+  { label: `01 / ${t("skills.languages")}`, items: ["TypeScript", "JavaScript", "Go", "Python", "Java", "C++"] },
+  { label: `02 / ${t("skills.product")}`, items: ["React", "Next.js", "React Native", "Astro", "Tailwind CSS"] },
+  { label: `03 / ${t("skills.systems")}`, items: ["Node.js", "GoFiber", "PostgreSQL", "WebSocket", "Firebase"] },
+  { label: `04 / ${t("skills.erp")}`, items: ["Microsoft Dynamics AX", "ERP Integration", "API Integration"] },
+  { label: `05 / ${t("skills.workflow")}`, items: ["Git", "Docker", "CI/CD", "Figma", "Postman"] },
 ];
 
-const base = lang === "th" ? "/th" : "";
-const copy = lang === "th" ? {
-  eyebrow: "Full-Stack Engineer · ERP (Dynamics AX)",
-  titleA: "เปลี่ยนปัญหาที่ซับซ้อน",
-  titleB: "ให้เป็นซอฟต์แวร์ที่ใช้งานได้จริง",
-  subtitle: "ผมปานเนตร วิศวกรซอฟต์แวร์สาย Full Stack ที่ชอบสร้างผลิตภัณฑ์ดิจิทัลให้รวดเร็ว เชื่อถือได้ และเข้าใจง่าย ตั้งแต่หน้าจอจนถึงระบบหลังบ้าน",
-  location: "กรุงเทพมหานคร ประเทศไทย",
-  open: "พร้อมรับโอกาสใหม่",
-  work: "ดูโปรเจกต์",
-  profile: "GitHub Profile",
-  experience: "ปีประสบการณ์",
-  shipped: "โปรเจกต์ที่พัฒนา",
-  achieved: "การแข่งขัน",
-  sectionKicker: "selected_work",
-  workTitle: "ซอฟต์แวร์ที่ออกแบบมาเพื่อแก้ปัญหาจริง",
-  workDesc: "ตั้งแต่แอปวางแผนท่องเที่ยวด้วย AI ไปจนถึงเกมความปลอดภัยไซเบอร์ แต่ละโปรเจกต์แสดงทั้งแนวคิด การออกแบบ และการลงมือพัฒนา",
-  caseStudy: "ดูรายละเอียด",
-  liveDemo: "เปิดเว็บไซต์",
-  stackKicker: "engineering_toolkit",
-  stackTitle: "เทคโนโลยีที่ใช้ส่งมอบงาน",
-  approachKicker: "how_i_work",
-  approachTitle: "คิดเป็นระบบ สร้างเพื่อผู้ใช้",
-  approaches: [
-    ["Product minded", "เริ่มจากปัญหาของผู้ใช้ แล้วค่อยเลือกเทคโนโลยีที่เหมาะสมกับงาน"],
-    ["Full-stack ownership", "ดูแลได้ตั้งแต่ UX, API, ฐานข้อมูล ไปจนถึงการ deploy และปรับปรุงระบบ"],
-    ["Built to evolve", "เขียนโค้ดที่อ่านง่าย แยกส่วนชัดเจน และพร้อมต่อยอดเมื่อผลิตภัณฑ์เติบโต"],
-  ],
-  ctaTag: "พร้อมสร้างสิ่งต่อไป",
-  ctaTitle: "มีโจทย์ที่น่าสนใจ? มาคุยกันครับ",
-  ctaDesc: "เปิดรับตำแหน่ง Software Engineer, งานพัฒนาโปรดักต์ และการร่วมสร้างโปรเจกต์ที่มีผลลัพธ์จริง",
-  ctaButton: "เริ่มพูดคุย",
-} : {
-  eyebrow: "Full-Stack Engineer · ERP (Dynamics AX)",
-  titleA: "I turn complex problems",
-  titleB: "into software that works.",
-  subtitle: "I’m Pannet, a full-stack software engineer focused on building digital products that feel fast, stay reliable, and make sense—from interface to infrastructure.",
-  location: "Bangkok, Thailand",
-  open: "Open to opportunities",
-  work: "View my work",
-  profile: "GitHub Profile",
-  experience: "year experience",
-  shipped: "projects shipped",
-  achieved: "competitions",
-  sectionKicker: "selected_work",
-  workTitle: "Software built around real problems.",
-  workDesc: "From AI-assisted travel planning to cybersecurity education, each project shows the product thinking and engineering behind the interface.",
-  caseStudy: "View case study",
-  liveDemo: "Live product",
-  stackKicker: "engineering_toolkit",
-  stackTitle: "The tools I use to ship.",
-  approachKicker: "how_i_work",
-  approachTitle: "Systems thinking, product focus.",
-  approaches: [
-    ["Product minded", "Start with the user’s problem, then choose the simplest technology that can solve it well."],
-    ["Full-stack ownership", "Work comfortably across UX, APIs, data models, deployment, and the details between them."],
-    ["Built to evolve", "Write clear, modular software that teammates can understand and products can grow on."],
-  ],
-  ctaTag: "Available for the next build",
-  ctaTitle: "Have an interesting problem? Let’s talk.",
-  ctaDesc: "I’m open to software engineering roles, product collaborations, and teams building things that create real value.",
-  ctaButton: "Start a conversation",
-};
+const approaches = [
+  [t("section.approach1_title"), t("section.approach1_desc")],
+  [t("section.approach2_title"), t("section.approach2_desc")],
+  [t("section.approach3_title"), t("section.approach3_desc")],
+];
+
+const href = (path: string) => localizePath(path, lang);
 ---
 
-<Layout title="Pannet Vanicharkorl — Software Engineer">
-  <Navbar />
+<Layout lang={lang} title={t("meta.default_title")} description={t("meta.default_description")}>
+  <Navbar lang={lang} />
 
   <main id="main-content">
     <section class="hero">
       <div class="hero-grid">
         <div class="hero-copy">
-          <div class="eyebrow"><span>&gt;_</span>{copy.eyebrow}</div>
-          <h1>{copy.titleA}<br /><em>{copy.titleB}</em></h1>
-          <p class="hero-description">{copy.subtitle}</p>
+          <div class="eyebrow"><span>&gt;_</span>{t("hero.eyebrow")}</div>
+          <h1>{t("hero.title_pre")}<br /><em>{t("hero.title_highlight")}</em></h1>
+          <p class="hero-description">{t("hero.subtitle")}</p>
 
-          <div class="availability" aria-label={`${copy.location}, ${copy.open}`}>
+          <div class="availability" aria-label={`${t("hero.location")}, ${t("hero.status")}`}>
             <span class="status-light"></span>
-            <span>{copy.open}</span>
+            <span>{t("hero.status")}</span>
             <i></i>
-            <span>{copy.location}</span>
+            <span>{t("hero.location")}</span>
           </div>
 
           <div class="hero-actions">
-            <a href={`${base}/projects`} class="button button-primary">{copy.work}<span>↗</span></a>
+            <a href={href("/projects")} class="button button-primary">{t("hero.explore")}<span>↗</span></a>
             <a href="https://github.com/KPV2004" target="_blank" rel="noopener noreferrer" class="button button-secondary">
               <svg width="17" height="17" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-              {copy.profile}
+              {t("hero.github")}
             </a>
           </div>
         </div>
 
-        <div class="code-window" aria-label="Developer profile code preview">
+        <div class="code-window" aria-label={t("hero.code_label")}>
           <div class="window-bar">
             <div class="window-dots"><span></span><span></span><span></span></div>
             <span>pannet.ts</span>
@@ -151,27 +96,27 @@ const copy = lang === "th" ? {
       </div>
 
       <div class="metrics">
-        <div><strong>1+</strong><span>{copy.experience}</span></div>
-        <div><strong>{allProjects.length}+</strong><span>{copy.shipped}</span></div>
-        <div><strong>{competitions.length}</strong><span>{copy.achieved}</span></div>
-        <div class="metric-note"><span class="commit-icon">●</span><p><b>{certificates.length} credentials</b><br />always learning, always shipping</p></div>
+        <div><strong>1+</strong><span>{t("hero.exp")}</span></div>
+        <div><strong>{allProjects.length}+</strong><span>{t("hero.projects_count")}</span></div>
+        <div><strong>{competitions.length}</strong><span>{t("hero.awards_count")}</span></div>
+        <div class="metric-note"><span class="commit-icon">●</span><p><b>{certificates.length} {t("hero.credentials")}</b><br />{t("hero.learning")}</p></div>
       </div>
     </section>
 
     <section class="work-section section-shell">
       <div class="section-intro">
-        <div><span class="kicker">// {copy.sectionKicker}</span><h2>{copy.workTitle}</h2></div>
-        <p>{copy.workDesc}</p>
+        <div><span class="kicker">// selected_work</span><h2>{t("section.projects_title")}</h2></div>
+        <p>{t("section.projects_desc")}</p>
       </div>
 
       <div class="project-list">
         {projects.map((project, index) => {
           const slug = entrySlug(project);
-          const detailLink = `${base}/projects/${slug}`;
+          const detailLink = href(`/projects/${slug}`);
           return (
             <article class="project-row">
-              <a href={detailLink} class="project-visual" aria-label={`View ${project.data.title}`}>
-                <img src={project.data.image} alt={`${project.data.title} interface`} loading="lazy" />
+              <a href={detailLink} class="project-visual" aria-label={`${t("section.view_project")} ${project.data.title}`}>
+                <img src={project.data.image} alt={`${project.data.title} ${t("section.project_image_alt")}`} loading="lazy" />
                 <span class="project-number">0{index + 1}</span>
               </a>
               <div class="project-info">
@@ -180,8 +125,8 @@ const copy = lang === "th" ? {
                 <p>{project.data.description}</p>
                 <div class="project-tags">{project.data.tags.slice(0, 5).map((tag) => <span>{tag}</span>)}</div>
                 <div class="project-links">
-                  <a href={detailLink}>{copy.caseStudy}<span>→</span></a>
-                  {project.data.demo && <a href={project.data.demo} target="_blank" rel="noopener noreferrer">{copy.liveDemo}<span>↗</span></a>}
+                  <a href={detailLink}>{t("card.case_study")}<span>→</span></a>
+                  {project.data.demo && <a href={project.data.demo} target="_blank" rel="noopener noreferrer">{t("section.live_demo")}<span>↗</span></a>}
                 </div>
               </div>
             </article>
@@ -189,22 +134,22 @@ const copy = lang === "th" ? {
         })}
       </div>
 
-      <a class="all-projects" href={`${base}/projects`}><span>[ {String(allProjects.length).padStart(2, "0")} ]</span>{t("section.view_all_projects")}</a>
+      <a class="all-projects" href={href("/projects")}><span>[ {String(allProjects.length).padStart(2, "0")} ]</span>{t("section.view_all_projects")}</a>
     </section>
 
     <section class="approach section-shell">
       <div class="section-intro compact">
-        <div><span class="kicker">// {copy.approachKicker}</span><h2>{copy.approachTitle}</h2></div>
+        <div><span class="kicker">// how_i_work</span><h2>{t("section.approach_title")}</h2></div>
       </div>
       <div class="approach-grid">
-        {copy.approaches.map((item, index) => (
+        {approaches.map((item, index) => (
           <article><span>0{index + 1}</span><h3>{item[0]}</h3><p>{item[1]}</p></article>
         ))}
       </div>
     </section>
 
     <section class="stack-section section-shell">
-      <div class="stack-heading"><span class="kicker">// {copy.stackKicker}</span><h2>{copy.stackTitle}</h2></div>
+      <div class="stack-heading"><span class="kicker">// engineering_toolkit</span><h2>{t("section.tech_stack")}</h2></div>
       <div class="stack-list">
         {skills.map((group) => (
           <div class="stack-row"><h3>{group.label}</h3><div>{group.items.map((item) => <span>{item}</span>)}</div></div>
@@ -214,16 +159,16 @@ const copy = lang === "th" ? {
 
     <section class="cta section-shell">
       <div class="cta-card">
-        <span class="cta-status"><i></i>{copy.ctaTag}</span>
-        <h2>{copy.ctaTitle}</h2>
-        <p>{copy.ctaDesc}</p>
-        <a href={`${base}/contact`} class="button button-primary">{copy.ctaButton}<span>↗</span></a>
+        <span class="cta-status"><i></i>{t("section.cta_tag")}</span>
+        <h2>{t("section.cta_title")}</h2>
+        <p>{t("section.cta_desc")}</p>
+        <a href={href("/contact")} class="button button-primary">{t("section.cta_button")}<span>↗</span></a>
         <div class="cta-decoration" aria-hidden="true">{`{ build(); }`}</div>
       </div>
     </section>
   </main>
 
-  <Footer />
+  <Footer lang={lang} />
 </Layout>
 
 <style>

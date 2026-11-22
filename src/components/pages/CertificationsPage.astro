@@ -3,7 +3,7 @@ import { getLocalizedCollection, entrySlug } from '../../utils/content';
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../Navbar.astro";
 import Footer from "../Footer.astro";
-import { useTranslations, type Lang } from "../../utils/i18n";
+import { useTranslations, localizePath, type Lang } from "../../utils/i18n";
 
 interface Props {
   lang: Lang;
@@ -15,8 +15,8 @@ const t = useTranslations(lang);
 const certificates = await getLocalizedCollection('certificates', lang);
 ---
 
-<Layout>
-  <Navbar />
+<Layout lang={lang} title={t('meta.certifications_title')} description={t('certifications.desc')}>
+  <Navbar lang={lang} />
 
   <section class="page-header" id="main-content">
     <div class="header-container">
@@ -34,7 +34,7 @@ const certificates = await getLocalizedCollection('certificates', lang);
         {certificates.map((cert) => {
           const certSlug = entrySlug(cert);
           const { data } = cert;
-          const detailHref = lang === 'th' ? `/th/certifications/${certSlug}` : `/certifications/${certSlug}`;
+          const detailHref = localizePath(`/certifications/${certSlug}`, lang);
           return (
             <div class="cert-card">
               {data.image && (
@@ -47,7 +47,7 @@ const certificates = await getLocalizedCollection('certificates', lang);
                   <span class="cert-date">{data.date}</span>
                 </div>
                 <h2 class="cert-title">{data.title}</h2>
-                <span class="cert-issuer">{lang === 'th' ? 'ออกโดย' : 'Issued by'} {data.issuer}</span>
+                <span class="cert-issuer">{t('cert.issued_by')} {data.issuer}</span>
 
                 <div class="skills-list">
                   {data.skills.map((skill) => (
@@ -56,7 +56,7 @@ const certificates = await getLocalizedCollection('certificates', lang);
                 </div>
 
                 <a href={detailHref} class="details-link">
-                  {t('card.read_mdx')} &rarr;
+                  {t('card.view_details')} &rarr;
                 </a>
               </div>
             </div>
@@ -66,7 +66,7 @@ const certificates = await getLocalizedCollection('certificates', lang);
     </div>
   </section>
 
-  <Footer />
+  <Footer lang={lang} />
 </Layout>
 
 <style>

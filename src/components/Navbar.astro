@@ -1,28 +1,37 @@
 ---
-import { getLangFromUrl, useTranslations, getLocalizedPath } from "../utils/i18n";
+import { getLangFromUrl, useTranslations, getLocalizedPath, localizePath, type Lang } from "../utils/i18n";
 
-const lang = getLangFromUrl(Astro.url);
+interface Props {
+    lang?: Lang;
+}
+
+const lang = Astro.props.lang ?? getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const pathname = Astro.url.pathname;
 const currentPath = pathname === "/" ? "/" : pathname.replace(/\/$/, "");
-const baseRoute = lang === "th" ? currentPath.replace(/^\/th/, "") || "/" : currentPath;
+const baseRoute = getLocalizedPath(currentPath, "en");
 
 const navItems = [
-    { name: t("nav.home"), href: lang === "th" ? "/th" : "/" },
-    { name: t("nav.about"), href: lang === "th" ? "/th/about" : "/about" },
-    { name: t("nav.projects"), href: lang === "th" ? "/th/projects" : "/projects" },
-    { name: t("nav.competitions"), href: lang === "th" ? "/th/competitions" : "/competitions" },
-    { name: t("nav.certifications"), href: lang === "th" ? "/th/certifications" : "/certifications" },
-];
+    { name: t("nav.home"), path: "/" },
+    { name: t("nav.about"), path: "/about" },
+    { name: t("nav.projects"), path: "/projects" },
+    { name: t("nav.competitions"), path: "/competitions" },
+    { name: t("nav.certifications"), path: "/certifications" },
+].map((item) => ({
+    ...item,
+    href: localizePath(item.path, lang),
+    isActive: baseRoute === item.path || (item.path !== "/" && baseRoute.startsWith(item.path)),
+}));
 
-const contactHref = lang === "th" ? "/th/contact" : "/contact";
-const targetLang = lang === "en" ? "th" : "en";
+const homeHref = localizePath("/", lang);
+const contactHref = localizePath("/contact", lang);
+const targetLang: Lang = lang === "en" ? "th" : "en";
 const switchPath = getLocalizedPath(pathname, targetLang);
 ---
 
 <header class="site-header">
     <div class="nav-shell">
-        <a href={lang === "th" ? "/th" : "/"} class="brand" aria-label="Pannet Vanicharkorl — home">
+        <a href={homeHref} class="brand" aria-label={t("nav.brand_label")}>
             <span class="brand-mark" aria-hidden="true">PV</span>
             <span class="brand-copy">
                 <strong>Pannet Vanicharkorl</strong>
@@ -30,48 +39,44 @@ const switchPath = getLocalizedPath(pathname, targetLang);
             </span>
         </a>
 
-        <nav class="desktop-nav" aria-label="Primary navigation">
+        <nav class="desktop-nav" aria-label={t("nav.primary_label")}>
             <ul class="nav-links">
                 {navItems.map((item) => {
-                    const itemBaseHref = lang === "th" ? item.href.replace(/^\/th/, "") || "/" : item.href;
-                    const isActive = baseRoute === itemBaseHref || (itemBaseHref !== "/" && baseRoute.startsWith(itemBaseHref));
                     return (
                         <li>
-                            <a href={item.href} class:list={["nav-link", { active: isActive }]} aria-current={isActive ? "page" : undefined}>
+                            <a href={item.href} class:list={["nav-link", { active: item.isActive }]} aria-current={item.isActive ? "page" : undefined}>
                                 {item.name}
                             </a>
                         </li>
                     );
                 })}
             </ul>
-            <a href={switchPath} class="lang-switch" aria-label={`Switch to ${targetLang.toUpperCase()}`}>{targetLang.toUpperCase()}</a>
+            <a href={switchPath} class="lang-switch" aria-label={t("nav.switch_lang")} hreflang={targetLang}>{targetLang.toUpperCase()}</a>
             <a href={contactHref} class="contact-link">
-                <span class="contact-dot"></span>{lang === "th" ? "ร่วมงานกัน" : "Let's talk"}
+                <span class="contact-dot"></span>{t("nav.cta")}
             </a>
         </nav>
 
         <div class="mobile-controls">
-            <a href={switchPath} class="lang-switch" aria-label={`Switch to ${targetLang.toUpperCase()}`}>{targetLang.toUpperCase()}</a>
-            <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+            <a href={switchPath} class="lang-switch" aria-label={t("nav.switch_lang")} hreflang={targetLang}>{targetLang.toUpperCase()}</a>
+            <button class="menu-toggle" id="menu-toggle" type="button" aria-label={t("nav.open_menu")} aria-expanded="false" aria-controls="mobile-menu">
                 <span></span><span></span>
             </button>
         </div>
     </div>
 
-    <nav class="mobile-nav" id="mobile-menu" aria-label="Mobile navigation">
+    <nav class="mobile-nav" id="mobile-menu" aria-label={t("nav.mobile_label")}>
         <ul class="mobile-links">
             {navItems.map((item, index) => {
-                const itemBaseHref = lang === "th" ? item.href.replace(/^\/th/, "") || "/" : item.href;
-                const isActive = baseRoute === itemBaseHref || (itemBaseHref !== "/" && baseRoute.startsWith(itemBaseHref));
                 return (
                     <li>
-                        <a href={item.href} class:list={["mobile-link", { active: isActive }]}>
+                        <a href={item.href} class:list={["mobile-link", { active: item.isActive }]}>
                             <span>0{index + 1}</span>{item.name}
                         </a>
                     </li>
                 );
             })}
-            <li><a href={contactHref} class="mobile-contact">{lang === "th" ? "ติดต่อพูดคุย" : "Start a conversation"}<span>↗</span></a></li>
+            <li><a href={contactHref} class="mobile-contact">{t("nav.mobile_cta")}<span>↗</span></a></li>
         </ul>
     </nav>
 </header>
