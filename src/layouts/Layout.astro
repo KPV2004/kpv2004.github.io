@@ -42,55 +42,60 @@ const {
         color-scheme: dark;
 
         /* Surfaces */
-        --bg: #080b0f;
-        --bg-elevated: #0d1218;
-        --surface: #10161e;
-        --surface-2: #151d27;
-        --surface-sunken: #0b1016;
-        --tint: rgba(255, 255, 255, .03);
-        --tint-hover: rgba(255, 255, 255, .055);
-        --header-bg: rgba(8, 11, 15, .82);
+        --bg: #0c0d0e;
+        --bg-elevated: #0f1112;
+        --surface: #121416;
+        --surface-2: #17191c;
+        --surface-sunken: #0e1012;
+        --tint: rgba(230, 232, 234, .03);
+        --tint-hover: rgba(230, 232, 234, .05);
+        --header-bg: rgba(12, 13, 14, .85);
 
         /* Borders */
-        --border: rgba(157, 176, 198, .14);
-        --border-strong: rgba(157, 176, 198, .24);
-        --border-input: #5b6878;
+        --border: #1d2023;
+        --border-strong: #2a2e33;
+        --border-input: #5c636b;   /* 3.1:1 on --surface-sunken */
 
         /* Text (contrast measured on --bg) */
-        --text: #edf4f8;           /* 17.7:1 */
-        --text-secondary: #b7c2cd; /* 10.9:1 */
-        --text-muted: #8e9ba9;     /*  7.0:1 */
-        --text-subtle: #7d8a98;    /*  5.6:1 labels, meta, footer */
-        --text-decor: #465361;     /* decorative only, e.g. code line numbers */
+        --text: #e6e8ea;           /* 15.9:1 */
+        --text-secondary: #b4b9be; /* 10.3:1 */
+        --text-muted: #9aa0a6;     /*  7.5:1 */
+        --text-subtle: #8a9096;    /*  6.0:1 labels, meta, footer */
+        --text-decor: #40454b;     /* decorative only, e.g. code line numbers */
 
-        /* Accent */
-        --accent: #7ee787;
-        --accent-hover: #9aefa1;
-        --accent-strong: #57ab5a;
-        --on-accent: #071009;
-        --accent-soft: rgba(126, 231, 135, .10);
-        --accent-border: rgba(126, 231, 135, .32);
-        --accent-glow: rgba(126, 231, 135, .6);
+        /* Accent: one quiet green, used sparingly (links, kickers, focus) */
+        --accent: #7fb88a;         /*  8.6:1 */
+        --accent-hover: #95c79f;
+        --accent-strong: #6aa575;
+        --on-accent: #0c0d0e;
+        --accent-soft: rgba(127, 184, 138, .07);
+        --accent-border: rgba(127, 184, 138, .28);
+        --accent-glow: transparent;
 
-        /* Secondary roles */
-        --info: #79c0ff;
-        --info-soft: rgba(121, 192, 255, .10);
-        --info-border: rgba(121, 192, 255, .24);
-        --award: #e3b341;
-        --award-soft: rgba(227, 179, 65, .12);
-        --award-border: rgba(227, 179, 65, .30);
-        --syntax-purple: #d2a8ff;
-        --syntax-red: #f47067;
-        --syntax-yellow: #d29922;
-        --syntax-green: #57ab5a;
-        --code-text: #d5dbe1;
+        /* Secondary roles collapse to neutrals; the accent is the only hue */
+        --info: var(--text-secondary);
+        --info-soft: var(--tint);
+        --info-border: var(--border-strong);
+        --award: var(--accent);
+        --award-soft: var(--accent-soft);
+        --award-border: var(--accent-border);
+        --syntax-purple: var(--text-secondary);
+        --syntax-red: var(--border-strong);
+        --syntax-yellow: var(--border-strong);
+        --syntax-green: var(--border-strong);
+        --code-text: #c9cdd1;
+
+        /* Primary button is neutral (light on dark) */
+        --button-primary-bg: var(--text);
+        --button-primary-hover: #ffffff;
+        --on-button-primary: var(--bg);
 
         /* States */
         --focus-ring: var(--accent);
-        --selection: rgba(126, 231, 135, .30);
-        --scrollbar: #25313e;
-        --scrollbar-hover: #344456;
-        --shadow-raised: 0 24px 65px rgba(0, 0, 0, .28);
+        --selection: rgba(127, 184, 138, .25);
+        --scrollbar: #24282c;
+        --scrollbar-hover: #33383d;
+        --shadow-raised: none;
 
         /* Shape and layout */
         --radius-card: 14px;
@@ -155,28 +160,13 @@ const {
         width: 100%;
         min-height: 100vh;
         overflow-x: hidden;
-        background:
-            radial-gradient(circle at 14% 0%, color-mix(in srgb, var(--info) 7%, transparent), transparent 30rem),
-            radial-gradient(circle at 90% 18%, color-mix(in srgb, var(--accent) 5%, transparent), transparent 28rem),
-            var(--bg);
+        background: var(--bg);
         color: var(--text);
         font-family: var(--sans);
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
 
-    body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        pointer-events: none;
-        background-image:
-            linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
-        background-size: 48px 48px;
-        mask-image: linear-gradient(to bottom, black, transparent 80%);
-    }
 
     ::selection { background: var(--selection); color: var(--text); }
 
@@ -212,9 +202,7 @@ const {
         position: relative;
         margin-top: clamp(3.5rem, 7vw, 6rem);
         border-top: 1px solid var(--border);
-        background:
-            radial-gradient(circle at 12% 0%, color-mix(in srgb, var(--accent) 6.5%, transparent), transparent 25rem),
-            linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 100%);
+        background: var(--bg-elevated);
         color: var(--text);
         font-family: var(--sans);
     }
